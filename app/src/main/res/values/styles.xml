@@ -11,6 +11,7 @@
     <style name="TextLabel" parent="TextAppearance.AppCompat">
         <!--EditText hint color-->
         <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
         <!-- TextInputLayout text color-->
         <item name="colorControlActivated">@android:color/holo_blue_bright</item>
         <!-- EditText line color when EditText on-focus-->
