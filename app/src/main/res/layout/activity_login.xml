@@ -68,6 +68,7 @@
                     android:layout_height="wrap_content"
                     android:textColorHint="#ffffff"
                     android:textStyle="bold"
+                    android:textColor="#FFFFFF"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
@@ -86,12 +87,12 @@
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
                     android:textStyle="bold"
+                    android:textColor="#FFFFFF"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF" />
 
             </android.support.design.widget.TextInputLayout>
