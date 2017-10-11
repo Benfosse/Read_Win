@@ -23,7 +23,7 @@ public class Launcher extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent login = new Intent(context, LoginActivity.class);
+                Intent login = new Intent(context, Login_Register_Activity.class);
                 startActivity(login);
             }
         });

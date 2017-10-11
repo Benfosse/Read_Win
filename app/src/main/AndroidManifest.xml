@@ -27,6 +27,10 @@
         <activity
             android:name=".GameMainPage"
             android:label="@string/title_activity_game_main_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Login_Register_Activity"
+            android:label="@string/title_activity_login__register_"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
