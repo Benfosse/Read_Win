@@ -9,7 +9,7 @@ import bookmanager.chalmers.edu.readwin.models.Question;
  * Created by benedikt on 12/10/2017.
  */
 
-public interface IQuestions {
+public interface IQuestionService {
     List<Question> getBookQuestions(int bookId);
     Question getBookQuestion(int bookId, int questionNumber);
     void answerBookQuestions(int bookId, List<Answer> answers);
