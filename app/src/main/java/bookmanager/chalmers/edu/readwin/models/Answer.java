@@ -8,6 +8,11 @@ public class Answer {
     private int QuestionNumber;
     private String Answer;
 
+    public Answer(int questionNumber, String answer) {
+        QuestionNumber = questionNumber;
+        Answer = answer;
+    }
+
     public int getQuestionNumber() {
         return QuestionNumber;
     }

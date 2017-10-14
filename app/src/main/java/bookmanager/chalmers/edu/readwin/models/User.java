@@ -1,5 +1,7 @@
 package bookmanager.chalmers.edu.readwin.models;
 
+import java.time.Year;
+
 /**
  * Created by benedikt on 12/10/2017.
  */
@@ -13,6 +15,17 @@ public class User {
     private int YearOfBirth;
     private String Avatar;
     private int CurrentScore;
+
+    public User(int id, String userName, String email, String firstName, String lastName, int yearOfBirth, String avatar, int currentScore) {
+        Id = id;
+        UserName = userName;
+        Email = email;
+        FirstName = firstName;
+        LastName = lastName;
+        YearOfBirth = yearOfBirth;
+        Avatar = avatar;
+        CurrentScore = currentScore;
+    }
 
     public int getId() {
         return Id;

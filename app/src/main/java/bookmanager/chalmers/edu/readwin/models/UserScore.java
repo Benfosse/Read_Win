@@ -9,6 +9,12 @@ public class UserScore {
     private String UserName;
     private int Score;
 
+    public UserScore(int userId, String userName, int score) {
+        UserId = userId;
+        UserName = userName;
+        Score = score;
+    }
+
     public int getUserId() {
         return UserId;
     }
