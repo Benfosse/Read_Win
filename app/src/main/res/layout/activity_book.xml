@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="bookmanager.chalmers.edu.readwin.BookActivity">
+
+    <ImageView
+        android:id="@+id/bookImage"
+        android:layout_width="209dp"
+        android:layout_height="252dp"
+        app:srcCompat="@android:drawable/ic_menu_report_image"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:id="@+id/bookTitle"
+        android:layout_width="118dp"
+        android:layout_height="60dp"
+        android:text="Title"
+        android:textSize="18sp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/bookAuthor"
+        android:layout_width="118dp"
+        android:layout_height="60dp"
+        android:text="Author"
+        android:textSize="16sp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="100dp" />
+
+    <TextView
+        android:id="@+id/bookDate"
+        android:layout_width="118dp"
+        android:layout_height="60dp"
+        android:text="Date"
+        android:textSize="16sp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/bookGenre"
+        android:layout_width="118dp"
+        android:layout_height="60dp"
+        android:text="Genre"
+        android:textSize="16sp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="320dp" />
+
+    <TextView
+        android:id="@+id/bookDescription"
+        android:layout_width="353dp"
+        android:layout_height="76dp"
+        android:text="Description text"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="350dp"
+        android:textSize="16sp"
+        android:layout_marginRight="5dp" />
+
+    <Button
+        android:id="@+id/startQuestionnaire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Questionnaire"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="440dp"/>
+</RelativeLayout>
