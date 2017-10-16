@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:theme="@style/TextLabel">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="10dp"
+        android:tint="#FFFFFF"
+        app:srcCompat="@drawable/ic_forum_black_24dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/usernametxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="10dp"/>
+    <EditText
+        android:id="@+id/usernameform"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:layout_alignBaseline="@+id/usernametxt"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/firstnametxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="10dp"/>
+    <EditText
+        android:id="@+id/firstnameform"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:layout_alignBaseline="@+id/firstnametxt"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/lastnametxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp"/>
+    <EditText
+        android:id="@+id/lastnameform"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:layout_alignBaseline="@+id/lastnametxt"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/dateofbirthtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year of Birth: "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="10dp"/>
+    <EditText
+        android:id="@+id/dateofbirthform"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:hint="Year of Birth"
+        android:inputType="number"
+        android:layout_alignBaseline="@+id/dateofbirthtxt"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/emailtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="10dp"/>
+    <EditText
+        android:id="@+id/emailform"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:layout_alignBaseline="@+id/emailtxt"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/passwordtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="10dp"/>
+    <EditText
+        android:id="@+id/passwordform"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_alignBaseline="@+id/passwordtxt"
+        android:layout_alignParentRight="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Validate"
+        android:layout_below="@+id/passwordform"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:textColor="#000000"/>
+
+
+
+
+
+</RelativeLayout>
