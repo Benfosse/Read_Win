@@ -32,6 +32,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import bookmanager.chalmers.edu.readwin.models.User;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -61,6 +63,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    User user1 = new User(0,"Ben","benjamin@chalmers.se","Benjamin","Fosse",1995,"none",0);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +97,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+
+
     }
 
     private void populateAutoComplete() {
@@ -166,6 +174,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
+        //Test de connexions
+
+       /* List <String> listClone = new ArrayList<String>();
+        for (String string : list) {
+            if(string.matches("(?i)(bea).*")){
+                listClone.add(string);
+            }
+        }
+        System.out.println(listClone);*/
+
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
@@ -184,9 +202,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+
+            if(email==user1.getEmail()){
+                if(password==user1.getPassword()){
+                    showProgress(true);
+                    mAuthTask = new UserLoginTask(email, password);
+                    mAuthTask.execute((Void) null);
+                }
+                else{
+                    mPasswordView.setError(getString(R.string.error_invalid_password_from_users));
+
+                }
+            }
+            else{
+                System.out.println("Email is : "+ email + " And should be : "+ user1.getEmail());
+                mEmailView.setError(getString(R.string.error_invalid_email_from_users));
+            }
+
+
+/*
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            mAuthTask.execute((Void) null); */
+
         }
     }
 

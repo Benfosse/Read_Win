@@ -1,6 +1,7 @@
 package bookmanager.chalmers.edu.readwin.models;
 
 import java.time.Year;
+import java.util.List;
 
 /**
  * Created by benedikt on 12/10/2017.
@@ -15,6 +16,9 @@ public class User {
     private int YearOfBirth;
     private String Avatar;
     private int CurrentScore;
+    private String password;
+    private String passwordhash;
+    private List<User> Users;
 
     public User(int id, String userName, String email, String firstName, String lastName, int yearOfBirth, String avatar, int currentScore) {
         Id = id;
@@ -25,6 +29,19 @@ public class User {
         YearOfBirth = yearOfBirth;
         Avatar = avatar;
         CurrentScore = currentScore;
+    }
+
+    public List addUser(List<User> Users, User User1){
+        Users.add(User1);
+        return Users;
+    }
+
+    public String getPasswordhash() {
+        return passwordhash;
+    }
+
+    public void setPasswordhash(String passwordhash) {
+        this.passwordhash = passwordhash;
     }
 
     public int getId() {
@@ -89,5 +106,17 @@ public class User {
 
     public void setCurrentScore(int currentScore) {
         CurrentScore = currentScore;
+    }
+
+    public List<User> getUsers() {
+        return Users;
+    }
+
+    public void setUsers(List<User> users) {
+        Users = users;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
