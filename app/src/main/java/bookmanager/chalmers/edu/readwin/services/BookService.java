@@ -21,8 +21,8 @@ public class BookService implements IBookService {
             "Alice's Adventures in Wonderland is an 1865 fantasy novel written by English mathematician Charles Lutwidge Dodgson under the pseudonym Lewis Carroll.",
             "http://t3.gstatic.com/images?q=tbn:ANd9GcSz9Z5sm0vXcZzhcPl6p_Cq53SDgFgiC8qS-Q6EPEHvSNic2eLr", "8To9");
 
-    public List<Book> getBooks(String ageCategory) {
-        List<Book> books = new ArrayList<Book>();
+    public ArrayList<Book> getBooks(String ageCategory) {
+        ArrayList<Book> books = new ArrayList<Book>();
 
         books.add(book1);
         books.add(book2);

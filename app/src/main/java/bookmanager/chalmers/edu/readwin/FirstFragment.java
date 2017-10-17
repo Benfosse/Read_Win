@@ -52,9 +52,8 @@ public class FirstFragment extends Fragment{
         rootView = inflater.inflate(R.layout.fragment_first, container, false);
 
         BookService bookService = new BookService();
-
         ListView bookList = rootView.findViewById(R.id.book_list);
-        bookList.setAdapter(new ArrayAdapter<Book>(getContext(), android.R.layout.simple_list_item_1, bookService.getBooks("")));
+        bookList.setAdapter(new BooksAdapter(getContext(), bookService.getBooks("")));
 
         AdapterView.OnItemClickListener bookClicked = new AdapterView.OnItemClickListener() {
             @Override
