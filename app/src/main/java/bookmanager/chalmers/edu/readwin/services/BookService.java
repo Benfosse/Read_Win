@@ -14,7 +14,7 @@ public class BookService implements IBookService {
     private Book book1 = new Book(1, "The Hobbit", "J. R. R. Tolkien", "9780582186552",
             "September 21, 1937", "High fantasy, Juvenile fantasy",
             "The Hobbit, or There and Back Again is a children's fantasy novel by English author J. R. R. Tolkien.",
-            "https://www.bookdiscounter.nl/covers/large/isbn/9780007887705", "8To9");
+            "/", "8To9");
 
     private Book book2 = new Book(2, "Alice's Adventures in Wonderland", "Lewis Carrol", "9781533345455",
             "26 November 1865", "Children's fiction",
