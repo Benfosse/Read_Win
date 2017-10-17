@@ -103,6 +103,11 @@ public class Book implements Parcelable {
         AgeCategory = ageCategory;
     }
 
+    @Override
+    public String toString() {
+        return getTitle() + " - " + getAuthor();
+    }
+
     public Book(Parcel parcel) {
         String[] data = new String[9];
 
