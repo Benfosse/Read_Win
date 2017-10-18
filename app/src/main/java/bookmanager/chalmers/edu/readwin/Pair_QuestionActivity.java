@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import bookmanager.chalmers.edu.readwin.models.Book;
 
-public class Questionnaire_Q2_Book1 extends AppCompatActivity {
+public class Pair_QuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
