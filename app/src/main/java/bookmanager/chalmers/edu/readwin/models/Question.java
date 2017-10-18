@@ -6,11 +6,19 @@ package bookmanager.chalmers.edu.readwin.models;
 
 public class Question {
     private int QuestionNumber;
-    private String Question;
+    private String Type;
 
-    public Question(int questionNumber, String question) {
+    private Multiple_Question Multiple;
+    private Pair_Question Pair;
+    private Ordering_Question Ordering;
+
+
+    public Question(int questionNumber, String type, Multiple_Question multiple, Pair_Question pair, Ordering_Question ordering) {
         QuestionNumber = questionNumber;
-        Question = question;
+        Type = type;
+        Multiple = multiple;
+        Pair = pair;
+        Ordering = ordering;
     }
 
     public int getQuestionNumber() {
@@ -21,11 +29,15 @@ public class Question {
         QuestionNumber = questionNumber;
     }
 
-    public String getQuestion() {
-        return Question;
-    }
+    public String getType() { return Type; }
 
-    public void setQuestion(String question) {
-        Question = question;
-    }
+    public void setType(String type) { this.Type = type; }
+
+    public Multiple_Question getMultiple() { return Multiple; }
+
+    public Pair_Question getPair() { return Pair; }
+
+    public Ordering_Question getOrdering() { return Ordering; }
+
+
 }

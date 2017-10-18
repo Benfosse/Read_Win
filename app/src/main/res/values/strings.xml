@@ -14,6 +14,11 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_invalid_password_from_users">Password doesn\'t match</string>
     <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_invalid_username">This username is invalid</string>
+    <string name="error_invalid_firstname">This first name is invalid</string>
+    <string name="error_invalid_lastname">This last name is invalid</string>
+    <string name="error_invalid_yearofbirth">This Year of Birth is invalid</string>
+
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
