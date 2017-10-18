@@ -34,6 +34,7 @@
             android:name=".Login_Register_Activity"
             android:label="@string/title_activity_login__register_"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity android:name=".BookActivity"></activity>
         <activity android:name=".QuestionsActivity"></activity>
