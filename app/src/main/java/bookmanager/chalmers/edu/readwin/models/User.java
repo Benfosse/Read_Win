@@ -16,7 +16,6 @@ public class User {
     private String Avatar;
     private int CurrentScore;
     private String Password;
-    private String Passwordhash;
     private List<User> Users;
 
     public User(int id, String userName, String email, String firstName, String lastName, int yearOfBirth, String avatar, int currentScore) {
@@ -45,14 +44,6 @@ public class User {
     public List addUser(List<User> Users, User User1){
         Users.add(User1);
         return Users;
-    }
-
-    public String getPasswordhash() {
-        return Passwordhash;
-    }
-
-    public void setPasswordhash(String passwordhash) {
-        this.Passwordhash = passwordhash;
     }
 
     public int getId() {

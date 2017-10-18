@@ -46,6 +46,7 @@ import android.util.Base64;
 import javax.crypto.*;
 
 import bookmanager.chalmers.edu.readwin.models.User;
+import bookmanager.chalmers.edu.readwin.services.UserService;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -77,106 +78,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
-    /*
-    public String encryption(String strNormalText){
-        String seedValue = "Chalmers";
-        String normalTextEnc="";
-        try {
-            normalTextEnc = AESHelper.encrypt(seedValue, strNormalText);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return normalTextEnc;
-    }
 
-    public String decryption(String strEncryptedText){
-        String seedValue = "Chalmers";
-        String strDecryptedText="";
-        try {
-            strDecryptedText = AESHelper.decrypt(seedValue, strEncryptedText);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return strDecryptedText;
-    }
-    */
+/*
+    String passwordhash = Cryptor.encryptIt("password");
 
-    private static final String TAG = LoginActivity.class.getSimpleName();
+    User user1 = new User(0,"Ben","benjamin@chalmers.se","Benjamin","Fosse",1995,"none",0,passwordhash);*/
 
-    private static String cryptoPass = "Chalmers";
+    /*String passwordhash = Cryptor.encryptIt("password");
+    private User user1 = new User(0,"Ben","benjamin@chalmers.se","Benjamin","Fosse",1995,"none",0,passwordhash);*/
 
-    public static String encryptIt(String value) {
-        try {
-            DESKeySpec keySpec = new DESKeySpec(cryptoPass.getBytes("UTF8"));
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            SecretKey key = keyFactory.generateSecret(keySpec);
-
-            byte[] clearText = value.getBytes("UTF8");
-            // Cipher is not thread safe
-            Cipher cipher = Cipher.getInstance("DES");
-            cipher.init(Cipher.ENCRYPT_MODE, key);
-
-            String encrypedValue = Base64.encodeToString(cipher.doFinal(clearText), Base64.DEFAULT);
-            Log.d(TAG, "Encrypted: " + value + " -> " + encrypedValue);
-            return encrypedValue;
-
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        }
-        return value;
-    };
-
-    public static String decryptIt(String value) {
-        try {
-            DESKeySpec keySpec = new DESKeySpec(cryptoPass.getBytes("UTF8"));
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            SecretKey key = keyFactory.generateSecret(keySpec);
-
-            byte[] encrypedPwdBytes = Base64.decode(value, Base64.DEFAULT);
-            // cipher is not thread safe
-            Cipher cipher = Cipher.getInstance("DES");
-            cipher.init(Cipher.DECRYPT_MODE, key);
-            byte[] decrypedValueBytes = (cipher.doFinal(encrypedPwdBytes));
-
-            String decrypedValue = new String(decrypedValueBytes);
-            Log.d(TAG, "Decrypted: " + value + " -> " + decrypedValue);
-            return decrypedValue;
-
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        }
-        return value;
-    }
-
-    String passwordhash = encryptIt("password");
-
-    User user1 = new User(0,"Ben","benjamin@chalmers.se","Benjamin","Fosse",1995,"none",0,passwordhash);
-
-
+    UserService userService = new UserService();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -310,23 +221,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // form field with an error.
             focusView.requestFocus();
         } else {
+
+            User user1 = userService.getUser(email);
+
+            System.out.println("USER EMAIL : " + user1.getEmail());
+
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 
             if(email.equals(user1.getEmail())){
-                if(password.equals(decryptIt(user1.getPassword()))){
+                if(password.equals(Cryptor.decryptIt(user1.getPassword()))){
                     showProgress(true);
                     mAuthTask = new UserLoginTask(email, password);
                     mAuthTask.execute((Void) null);
                 }
                 else{
-                    System.out.println("Password dehash = " + decryptIt(user1.getPassword()) + " mdp hash = " + user1.getPassword());
+                    //System.out.println("Password dehash = " + Cryptor.decryptIt(user1.getPassword()) + " mdp hash = " + user1.getPassword());
                     mPasswordView.setError(getString(R.string.error_invalid_password_from_users));
 
                 }
             }
             else{
-                System.out.println("Email is : "+ email + " And should be : "+ user1.getEmail());
+                //System.out.println("Email is : "+ email + " And should be : "+ user1.getEmail());
                 mEmailView.setError(getString(R.string.error_invalid_email_from_users));
             }
 

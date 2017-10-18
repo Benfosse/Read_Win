@@ -1,5 +1,7 @@
 package bookmanager.chalmers.edu.readwin.services.interfaces;
 
+import java.util.ArrayList;
+
 import bookmanager.chalmers.edu.readwin.models.User;
 
 /**
@@ -9,5 +11,7 @@ import bookmanager.chalmers.edu.readwin.models.User;
 public interface IUserService {
     User getCurrentUser();
     void modifyCurrentUser(User user);
-    int createUser(User user);
+    User createUser(int id, String userName, String email, String firstName, String lastName, int yearOfBirth, String avatar, int currentScore, String password);
+    public ArrayList<User> addUsers(User user);
+    public User getUser(String email);
 }
