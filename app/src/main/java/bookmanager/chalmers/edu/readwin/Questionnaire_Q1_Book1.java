@@ -20,7 +20,7 @@ public class Questionnaire_Q1_Book1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_questionnaire__q1__book1);
+        setContentView(R.layout.activity_questionnaire_multiplechoice);
 
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {

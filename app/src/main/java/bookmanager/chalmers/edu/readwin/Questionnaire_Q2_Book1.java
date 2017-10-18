@@ -11,7 +11,7 @@ public class Questionnaire_Q2_Book1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_questionnaire__q2__book1);
+        setContentView(R.layout.activity_questionnaire_pair);
 
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {
