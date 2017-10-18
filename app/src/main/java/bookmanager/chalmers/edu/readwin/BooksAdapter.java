@@ -27,10 +27,10 @@ public class BooksAdapter extends ArrayAdapter<Book> {
         }
         // Lookup view for data population
         TextView bookTitle = (TextView) convertView.findViewById(R.id.bookTitleList);
-        TextView bookAuthor = (TextView) convertView.findViewById(R.id.bookAuthorList);
+
         // Populate the data into the template view using the data object
         bookTitle.setText(book.getTitle());
-        bookAuthor.setText(book.getAuthor());
+
         // Return the completed view to render on screen
         return convertView;
     }
