@@ -203,7 +203,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 
-            if(email==user1.getEmail()){
+            if(email.equals(user1.getEmail())){
                 if(password==user1.getPassword()){
                     showProgress(true);
                     mAuthTask = new UserLoginTask(email, password);
