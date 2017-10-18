@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import bookmanager.chalmers.edu.readwin.models.Book;
 import bookmanager.chalmers.edu.readwin.services.BookService;
 
@@ -43,9 +45,7 @@ public class BookActivity extends AppCompatActivity {
             genre.setText(book.getGenre());
             description.setText(book.getDescription());
 
-            // TODO: Finish fetching image
-            // Bitmap image = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + book.getImage());
-            // imageView.setImageBitmap(image);
+            Picasso.with(getApplicationContext()).load(book.getImage()).into(imageView);
 
             Button startQuestionsButton = (Button) findViewById(R.id.startQuestionnaire);
             startQuestionsButton.setOnClickListener(new View.OnClickListener() {

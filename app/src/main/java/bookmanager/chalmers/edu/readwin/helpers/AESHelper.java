@@ -1,4 +1,4 @@
-package bookmanager.chalmers.edu.readwin;
+package bookmanager.chalmers.edu.readwin.helpers;
 
 import java.security.SecureRandom;
 import javax.crypto.Cipher;

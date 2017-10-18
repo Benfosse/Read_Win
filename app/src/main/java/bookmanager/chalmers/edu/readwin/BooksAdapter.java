@@ -2,11 +2,15 @@ package bookmanager.chalmers.edu.readwin;
 
 import android.view.LayoutInflater;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 import android.content.Context;
 import java.util.ArrayList;
 import android.view.ViewGroup;
+
+import com.squareup.picasso.Picasso;
+
 import bookmanager.chalmers.edu.readwin.models.Book;
 
 /**
@@ -26,10 +30,12 @@ public class BooksAdapter extends ArrayAdapter<Book> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_book, parent, false);
         }
         // Lookup view for data population
-        TextView bookTitle = (TextView) convertView.findViewById(R.id.bookTitleList);
+        TextView bookTitle = convertView.findViewById(R.id.bookTitleList);
+        ImageView bookImage = convertView.findViewById(R.id.bookImageList);
 
         // Populate the data into the template view using the data object
         bookTitle.setText(book.getTitle());
+        Picasso.with(getContext()).load(book.getImage()).into(bookImage);
 
         // Return the completed view to render on screen
         return convertView;
