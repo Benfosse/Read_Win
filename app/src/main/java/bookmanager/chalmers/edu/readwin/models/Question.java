@@ -7,10 +7,13 @@ package bookmanager.chalmers.edu.readwin.models;
 public class Question {
     private int QuestionNumber;
     private String Question;
+    private String Type;
 
-    public Question(int questionNumber, String question) {
+
+    public Question(int questionNumber, String question, String type) {
         QuestionNumber = questionNumber;
         Question = question;
+        Type = type;
     }
 
     public int getQuestionNumber() {
@@ -28,4 +31,10 @@ public class Question {
     public void setQuestion(String question) {
         Question = question;
     }
+
+    public String getType() { return Type; }
+
+    public void setType(String type) { this.Type = type; }
+
+
 }
