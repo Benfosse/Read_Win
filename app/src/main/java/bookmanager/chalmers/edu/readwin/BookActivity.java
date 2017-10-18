@@ -26,40 +26,41 @@ public class BookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
 
-        // TODO: Replace. The book should be passed in as a bundle from the books overview
-        BookService bookService = new BookService();
-        final Book book = bookService.getBook(1);
+        Bundle bundle = this.getIntent().getExtras();
+        if (bundle != null) {
+            final Book book = bundle.getParcelable("book");
 
-        TextView title = (TextView) findViewById(R.id.bookTitle);
-        TextView author = (TextView) findViewById(R.id.bookAuthor);
-        TextView date = (TextView) findViewById(R.id.bookDate);
-        TextView genre = (TextView) findViewById(R.id.bookGenre);
-        TextView description = (TextView) findViewById(R.id.bookDescription);
-        ImageView imageView = (ImageView) findViewById(R.id.bookImage);
+            TextView title = (TextView) findViewById(R.id.bookTitle);
+            TextView author = (TextView) findViewById(R.id.bookAuthor);
+            TextView date = (TextView) findViewById(R.id.bookDate);
+            TextView genre = (TextView) findViewById(R.id.bookGenre);
+            TextView description = (TextView) findViewById(R.id.bookDescription);
+            ImageView imageView = (ImageView) findViewById(R.id.bookImage);
 
-        title.setText(book.getTitle());
-        author.setText(book.getAuthor());
-        date.setText(book.getDate());
-        genre.setText(book.getGenre());
-        description.setText(book.getDescription());
+            title.setText(book.getTitle());
+            author.setText(book.getAuthor());
+            date.setText(book.getDate());
+            genre.setText(book.getGenre());
+            description.setText(book.getDescription());
 
-        // TODO: Finish fetching image
-        // Bitmap image = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + book.getImage());
-        // imageView.setImageBitmap(image);
+            // TODO: Finish fetching image
+            // Bitmap image = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + book.getImage());
+            // imageView.setImageBitmap(image);
 
-        Button startQuestionsButton = (Button) findViewById(R.id.startQuestionnaire);
-        startQuestionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent bookQuestionsIntent = new Intent(BookActivity.this,
-                        QuestionsActivity.class);
+            Button startQuestionsButton = (Button) findViewById(R.id.startQuestionnaire);
+            startQuestionsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Intent bookQuestionsIntent = new Intent(BookActivity.this,
+                            QuestionsActivity.class);
 
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("book", book);
-                bookQuestionsIntent.putExtras(bundle);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("book", book);
+                    bookQuestionsIntent.putExtras(bundle);
 
-                startActivity(bookQuestionsIntent);
-            }
-        });
+                    startActivity(bookQuestionsIntent);
+                }
+            });
+        }
     }
 }
