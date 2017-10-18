@@ -19,25 +19,27 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
         </activity>
+
         <activity
             android:name=".GameMainPage"
-            android:label="@string/title_activity_game_main_page"
+            android:label="GameMainPage"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity
-            android:name=".Login_Register_Activity"
-            android:label="@string/title_activity_login__register_"
-            android:theme="@style/AppTheme.NoActionBar">
+    <activity
+        android:name=".Login_Register_Activity"
+        android:label="Login_Register_Activity"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
 
-        </activity>
-        <activity android:name=".BookActivity"></activity>
-        <activity android:name=".QuestionsActivity"></activity>
+    <activity android:name=".BookActivity"/>
+    <activity android:name=".QuestionsActivity"/>
+    <activity android:name=".Questionnaire_Q1_Book1" />
+    <activity android:name=".Questionnaire_Q2_Book1"/>
+
     </application>
 
 </manifest>

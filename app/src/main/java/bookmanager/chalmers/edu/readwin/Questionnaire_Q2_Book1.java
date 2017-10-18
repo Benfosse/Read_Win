@@ -1,0 +1,24 @@
+package bookmanager.chalmers.edu.readwin;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import bookmanager.chalmers.edu.readwin.models.Book;
+
+public class Questionnaire_Q2_Book1 extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_questionnaire__q2__book1);
+
+        Bundle bundle = this.getIntent().getExtras();
+        if (bundle != null) {
+            final Book book = bundle.getParcelable("book");
+
+            TextView title = (TextView) findViewById(R.id.textTitle_Book1);
+            title.setText(book.getTitle());
+        }
+    }
+}
