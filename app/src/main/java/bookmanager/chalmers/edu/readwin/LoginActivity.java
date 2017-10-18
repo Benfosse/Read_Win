@@ -224,7 +224,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             User user1 = userService.getUser(email);
 
-            System.out.println("USER EMAIL : " + user1.getEmail());
+            //System.out.println("USER EMAIL : " + user1.getEmail());
 
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
