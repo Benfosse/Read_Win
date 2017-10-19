@@ -3,6 +3,7 @@ package bookmanager.chalmers.edu.readwin;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -87,11 +88,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /*String passwordhash = Cryptor.encryptIt("password");
     private User user1 = new User(0,"Ben","benjamin@chalmers.se","Benjamin","Fosse",1995,"none",0,passwordhash);*/
 
-    UserService userService = new UserService();
+    //UserService userService = new UserService();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -222,7 +224,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView.requestFocus();
         } else {
 
-            User user1 = userService.getUser(email);
+            //User user1 = userService.getUser(email);
+
+            Bundle b = getIntent().getExtras();
+            ArrayList<User> arr = (ArrayList<User>)b.get("userlist");
+            User user1;
+
+            int i = 0;
+            while ((arr.get(i).getEmail().equals(email) != true) && i < arr.size()-1) {
+                i += 1;
+            }
+            if(arr.get(i).getEmail().equals(email)){
+                user1 = arr.get(i);
+            }
+            else{
+                user1 = arr.get(0);
+            }
 
             //System.out.println("USER EMAIL : " + user1.getEmail());
 
@@ -234,6 +251,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     showProgress(true);
                     mAuthTask = new UserLoginTask(email, password);
                     mAuthTask.execute((Void) null);
+                    Intent intent = new Intent(LoginActivity.this, GameMainPage.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else{
                     //System.out.println("Password dehash = " + Cryptor.decryptIt(user1.getPassword()) + " mdp hash = " + user1.getPassword());

@@ -46,6 +46,10 @@ public class UserService implements IUserService {
         return users;
     }
 
+    public ArrayList<User> getUserList (){
+        return users;
+    }
+
     public User getUser(String email) {
         int i = 0;
         while ((users.get(i).getEmail().equals(email) != true) && i < users.size()-1) {

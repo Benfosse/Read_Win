@@ -1,12 +1,15 @@
 package bookmanager.chalmers.edu.readwin.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by benedikt on 12/10/2017.
  */
 
-public class User {
+public class User implements Parcelable {
     private int Id;
     private String UserName;
     private String Email;
@@ -120,5 +123,44 @@ public class User {
 
     public String getPassword() {
         return Password;
+    }
+
+
+    public User(Parcel parcel) {
+        String[] data = new String[9];
+
+        parcel.readStringArray(data);
+
+        this.Id = Integer.parseInt(data[0]);
+        this.Email = data[1];
+        this.UserName = data[2];
+        this.FirstName = data[3];
+        this.LastName = data[4];
+        this.YearOfBirth = Integer.parseInt(data[5]);
+        this.Avatar = data[6];
+        this.CurrentScore = Integer.parseInt(data[7]);
+        this.Password = data[8];
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeStringArray(new String[] { String.valueOf(this.Id), this.Email, this.UserName, this.FirstName, this.LastName, String.valueOf(this.YearOfBirth), this.Avatar, String.valueOf(this.CurrentScore), this.Password });
     }
 }

@@ -1,5 +1,6 @@
 package bookmanager.chalmers.edu.readwin;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.ArrayList;
 
 import bookmanager.chalmers.edu.readwin.models.User;
 
@@ -86,21 +89,21 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Check for a valid username, if the user entered one.
-        if (!TextUtils.isEmpty(username)) {
+        if (TextUtils.isEmpty(username)) {
             mUsername.setError(getString(R.string.error_invalid_username));
             focusView = mUsername;
             cancel = true;
         }
 
         // Check for a valid firstname, if the user entered one.
-        if (!TextUtils.isEmpty(firstname)) {
+        if (TextUtils.isEmpty(firstname)) {
             mFirstname.setError(getString(R.string.error_invalid_firstname));
             focusView = mFirstname;
             cancel = true;
         }
 
         // Check for a valid lastname, if the user entered one.
-        if (!TextUtils.isEmpty(lastname)) {
+        if (TextUtils.isEmpty(lastname)) {
             mLastname.setError(getString(R.string.error_invalid_lastname));
             focusView = mLoginFormView;
             cancel = true;
@@ -112,11 +115,24 @@ public class RegisterActivity extends AppCompatActivity {
             focusView = mYearOfBirth;
             cancel = true;
         }
+
+        Bundle b = getIntent().getExtras();
+        ArrayList<User> arr = (ArrayList<User>)b.get("userlist");
+        int Sizelist = arr.size();
+
+        //mAuthTask.execute();
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
+
+            User user1 = new User(Sizelist,username,email,firstname,lastname,yearofbirth,"",0,Cryptor.encryptIt(password));
+            arr.add(user1);
+            Intent loginregister = new Intent(this, Login_Register_Activity.class);
+            loginregister.putExtra("userlist",arr);
+            startActivity(loginregister);
  /*ADD USER IN DATABASE */
 
         }
