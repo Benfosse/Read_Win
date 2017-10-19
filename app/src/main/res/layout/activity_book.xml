@@ -17,9 +17,9 @@
     <TextView
         android:id="@+id/bookTitle"
         android:layout_width="118dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:text="Title"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_marginLeft="240dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="5dp" />
@@ -27,30 +27,30 @@
     <TextView
         android:id="@+id/bookAuthor"
         android:layout_width="118dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:text="Author"
         android:textSize="16sp"
         android:layout_marginLeft="240dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="125dp" />
 
     <TextView
         android:id="@+id/bookDate"
         android:layout_width="118dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:text="Date"
         android:textSize="16sp"
         android:layout_marginLeft="240dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="195dp"
         android:layout_marginRight="5dp" />
 
     <TextView
         android:id="@+id/bookGenre"
         android:layout_width="118dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:text="Genre"
         android:textSize="16sp"
         android:layout_marginLeft="240dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="265dp"
         android:layout_marginRight="5dp" />
 
     <TextView

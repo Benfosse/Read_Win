@@ -22,7 +22,7 @@ public class BookService implements IBookService {
             "http://t3.gstatic.com/images?q=tbn:ANd9GcSz9Z5sm0vXcZzhcPl6p_Cq53SDgFgiC8qS-Q6EPEHvSNic2eLr", "8To9");
 
     private Book book3 = new Book(3, "Moby-Dick", "Herman Melville", "9781535277181",
-            "18 October 1851", "Novel, adventure fiction, epic, sea story, encyclopedic novel",
+            "18 October 1851", "Novel, adventure fiction, epic",
             "Moby-Dick; or, The Whale is a novel by American writer Herman Melville, published in 1851 during the period of the American Renaissance.",
             "http://t0.gstatic.com/images?q=tbn:ANd9GcRVzGSCtcxuJZ51obbG92GWfkq9L7d3vIJhy5XHEr-4WoKN7FJP", "10To11");
 
