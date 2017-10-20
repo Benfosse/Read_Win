@@ -81,15 +81,17 @@ public class GameMainPage extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0)
+                return IntroFragment.newInstance();
+            else if (position == 1)
                 return BookListFragment.newInstance();
             else
-                return SecondFragment.newInstance();
+                return RankingFragment.newInstance();
         }
 
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            return 3;
         }
     }
 }

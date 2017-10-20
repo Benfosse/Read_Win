@@ -15,16 +15,16 @@ import bookmanager.chalmers.edu.readwin.services.BookService;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SecondFragment.OnFragmentInteractionListener} interface
+ * {@link IntroFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SecondFragment#newInstance} factory method to
+ * Use the {@link IntroFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 
 public class BookListFragment extends Fragment{
 
     private View rootView;
-    private SecondFragment.OnFragmentInteractionListener mListener;
+    private IntroFragment.OnFragmentInteractionListener mListener;
 
     public BookListFragment() {
         // Required empty public constructor
@@ -73,6 +73,20 @@ public class BookListFragment extends Fragment{
 
         return rootView;
     }
+
+    // TODO: Decide whether to remove this
+    /*
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+    */
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);

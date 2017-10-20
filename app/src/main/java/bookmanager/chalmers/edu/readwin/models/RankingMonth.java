@@ -1,5 +1,6 @@
 package bookmanager.chalmers.edu.readwin.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public class RankingMonth {
     private int Id;
     private int Year;
     private Month Month;
-    private List<UserScore> UserScores;
+    private ArrayList<UserScore> UserScores;
 
     public int getId() {
         return Id;
@@ -38,11 +39,11 @@ public class RankingMonth {
         Month = month;
     }
 
-    public List<UserScore> getUserScores() {
+    public ArrayList<UserScore> getUserScores() {
         return UserScores;
     }
 
-    public void setUserScores(List<UserScore> userScores) {
+    public void setUserScores(ArrayList<UserScore> userScores) {
         UserScores = userScores;
     }
 }

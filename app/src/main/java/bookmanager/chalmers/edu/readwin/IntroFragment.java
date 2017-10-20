@@ -1,6 +1,5 @@
 package bookmanager.chalmers.edu.readwin;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,16 +11,16 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SecondFragment.OnFragmentInteractionListener} interface
+ * {@link IntroFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SecondFragment#newInstance} factory method to
+ * Use the {@link IntroFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SecondFragment extends Fragment {
+public class IntroFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SecondFragment() {
+    public IntroFragment() {
         // Required empty public constructor
     }
 
@@ -31,8 +30,8 @@ public class SecondFragment extends Fragment {
      *
      * @return A new instance of fragment SecondFragment.
      */
-    public static SecondFragment newInstance() {
-        SecondFragment fragment = new SecondFragment();
+    public static IntroFragment newInstance() {
+        IntroFragment fragment = new IntroFragment();
         return fragment;
     }
 
@@ -45,7 +44,7 @@ public class SecondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        return inflater.inflate(R.layout.fragment_intro, container, false);
     }
 
     public void onButtonPressed(Uri uri) {

@@ -4,7 +4,7 @@ package bookmanager.chalmers.edu.readwin.models;
  * Created by benedikt on 12/10/2017.
  */
 
-public class UserScore {
+public class UserScore implements Comparable<UserScore> {
     private int UserId;
     private String UserName;
     private int Score;
@@ -37,5 +37,23 @@ public class UserScore {
 
     public void setScore(int score) {
         Score = score;
+    }
+
+    @Override
+    public String toString() {
+        return getUserName() + ": " + getScore();
+    }
+
+    @Override
+    public int compareTo(UserScore userScore) {
+        if (Score < userScore.getScore()) {
+            return 1;
+        }
+        else if (Score > userScore.getScore()) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
     }
 }
