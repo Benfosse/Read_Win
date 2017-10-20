@@ -36,7 +36,7 @@
 
 
     <ImageButton
-        android:id="@+id/imageButton_Q1toQ2_B1"
+        android:id="@+id/next_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_media_play"
@@ -45,6 +45,13 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:id="@+id/prev_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_media_play"
+        android:layout_alignParentBottom="true" />
 
     <TextView
         android:id="@+id/question_index"
@@ -95,6 +102,12 @@
         android:layout_marginTop="20dp"
         android:textSize="20dp"
         android:text="RadioButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioButton4"
+        android:layout_marginTop="40dp"/>
 
 
 
