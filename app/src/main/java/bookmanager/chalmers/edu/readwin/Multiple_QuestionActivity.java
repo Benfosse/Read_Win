@@ -1,6 +1,7 @@
 package bookmanager.chalmers.edu.readwin;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,7 @@ public class Multiple_QuestionActivity extends AppCompatActivity {
 
     RadioButton ans1, ans2, ans3, ans4;
     TextView question;
-    ImageButton next, prev;
+    FloatingActionButton next, prev;
     int question_index;
 
     @Override
@@ -29,8 +30,8 @@ public class Multiple_QuestionActivity extends AppCompatActivity {
         ans3 = (RadioButton)findViewById(R.id.radioButton3);
         ans4 = (RadioButton)findViewById(R.id.radioButton4);
         question = (TextView)findViewById(R.id.textQuestion);
-        next = (ImageButton)findViewById(R.id.next_Button);
-        prev = (ImageButton)findViewById(R.id.prev_Button);
+        next = (FloatingActionButton) findViewById(R.id.next_Button);
+        prev = (FloatingActionButton) findViewById(R.id.prev_Button);
 
 
         question.setText(getIntent().getStringExtra("Question"));
@@ -93,5 +94,14 @@ public class Multiple_QuestionActivity extends AppCompatActivity {
             }
         });
 
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent data = new Intent();
+                data.putExtra("index", question_index-1);
+                setResult(RESULT_OK, data);
+                finish();
+            }
+        });
     }
 }
