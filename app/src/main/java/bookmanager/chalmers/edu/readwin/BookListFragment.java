@@ -21,17 +21,17 @@ import bookmanager.chalmers.edu.readwin.services.BookService;
  * create an instance of this fragment.
  */
 
-public class FirstFragment extends Fragment{
+public class BookListFragment extends Fragment{
 
     private View rootView;
     private SecondFragment.OnFragmentInteractionListener mListener;
 
-    public FirstFragment() {
+    public BookListFragment() {
         // Required empty public constructor
     }
 
-    public static FirstFragment newInstance() {
-        FirstFragment fragment = new FirstFragment();
+    public static BookListFragment newInstance() {
+        BookListFragment fragment = new BookListFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -46,7 +46,7 @@ public class FirstFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_first, container, false);
+        rootView = inflater.inflate(R.layout.fragment_book_list, container, false);
 
         BookService bookService = new BookService();
         GridView bookGrid = rootView.findViewById(R.id.book_grid);

@@ -23,6 +23,11 @@
             android:name=".GameMainPage"
             android:label="GameMainPage"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Login_Register_Activity"
@@ -30,13 +35,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".BookActivity" />
-        <activity android:name=".QuestionsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".QuestionsActivity"></activity>
         <activity android:name=".Multiple_QuestionActivity" />
         <activity android:name=".Pair_QuestionActivity" />
         <activity android:name=".RegisterActivity"></activity>
