@@ -7,7 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import bookmanager.chalmers.edu.readwin.models.Book;
 import bookmanager.chalmers.edu.readwin.services.BookService;
@@ -24,6 +33,7 @@ import bookmanager.chalmers.edu.readwin.services.BookService;
 public class BookListFragment extends Fragment{
 
     private View rootView;
+    private int ageCategoryIndex;
     private IntroFragment.OnFragmentInteractionListener mListener;
 
     public BookListFragment() {
@@ -48,9 +58,51 @@ public class BookListFragment extends Fragment{
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_book_list, container, false);
 
-        BookService bookService = new BookService();
+        final BookService bookService = new BookService();
+
+        // Listener for age category arrow buttons
+        ImageButton ageCategoryLeft = rootView.findViewById(R.id.age_category_left);
+        ImageButton ageCategoryRight = rootView.findViewById(R.id.age_category_right);
+
+        final List<String> bookCategories = bookService.getBookCategories();
+        TextView bookListHeader = rootView.findViewById(R.id.book_list_header);
+        ageCategoryIndex = 0;
+        bookListHeader.setText(bookCategories.get(ageCategoryIndex) + " Years Old");
+
+        ageCategoryLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                TextView bookListHeader = rootView.findViewById(R.id.book_list_header);
+                if(ageCategoryIndex == 0)
+                    ageCategoryIndex = bookCategories.size() - 1;
+                else
+                    ageCategoryIndex -= 1;
+
+                bookListHeader.setText(bookCategories.get(ageCategoryIndex) + " Years Old");
+                GridView bookGrid = rootView.findViewById(R.id.book_grid);
+                bookGrid.setAdapter(new BooksAdapter(getContext(), bookService.getBooks(bookCategories.get(ageCategoryIndex))));
+            }
+        });
+
+        ageCategoryRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                TextView bookListHeader = rootView.findViewById(R.id.book_list_header);
+                if(ageCategoryIndex == (bookCategories.size() - 1))
+                    ageCategoryIndex = 0;
+                else
+                    ageCategoryIndex += 1;
+
+                bookListHeader.setText(bookCategories.get(ageCategoryIndex) + " Years Old");
+                GridView bookGrid = rootView.findViewById(R.id.book_grid);
+                bookGrid.setAdapter(new BooksAdapter(getContext(), bookService.getBooks(bookCategories.get(ageCategoryIndex))));
+            }
+        });
+
+        // Setting book list
         GridView bookGrid = rootView.findViewById(R.id.book_grid);
-        bookGrid.setAdapter(new BooksAdapter(getContext(), bookService.getBooks("")));
+        // TODO: Should be showing the age category that the current user falls into
+        bookGrid.setAdapter(new BooksAdapter(getContext(), bookService.getBooks(bookCategories.get(ageCategoryIndex))));
 
         AdapterView.OnItemClickListener bookClicked = new AdapterView.OnItemClickListener() {
             @Override
