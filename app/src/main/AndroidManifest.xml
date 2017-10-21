@@ -15,12 +15,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity android:name=".Launcher" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".GameMainPage"
             android:label="GameMainPage"
@@ -30,12 +36,8 @@
             android:name=".Login_Register_Activity"
             android:label="Login_Register_Activity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
-        <activity android:name=".BookActivity" />
+        <activity android:name=".BookActivity"></activity>
         <activity android:name=".QuestionsActivity"></activity>
         <activity android:name=".Multiple_QuestionActivity" />
         <activity android:name=".Pair_QuestionActivity" />
