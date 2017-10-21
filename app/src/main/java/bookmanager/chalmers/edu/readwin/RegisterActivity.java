@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
         String username = mUsername.getText().toString();
         String firstname = mFirstname.getText().toString();
         String lastname = mLastname.getText().toString();
-        int yearofbirth = Integer.parseInt(mYearOfBirth.getText().toString());
+        int yearofbirth = 0;
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
 
@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPassword.setError(getString(R.string.error_invalid_password));
             focusView = mPassword;
             cancel = true;
@@ -110,10 +110,17 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Check for a valid Year of Birth, if the user entered one. NEED CHECK YEAR FORM
-        if (!isYearofBirthValid(yearofbirth)) {
+        if (TextUtils.isEmpty(mYearOfBirth.getText())) {
+            mYearOfBirth.setError("You forgot your Year of Birth ?");
+            focusView = mYearOfBirth;
+            cancel = true;}
+        else if(!isYearofBirthValid(Integer.parseInt(mYearOfBirth.getText().toString()))){
             mYearOfBirth.setError(getString(R.string.error_invalid_yearofbirth));
             focusView = mYearOfBirth;
             cancel = true;
+        }
+        else{
+            yearofbirth=Integer.parseInt(mYearOfBirth.getText().toString());
         }
 
         Bundle b = getIntent().getExtras();
