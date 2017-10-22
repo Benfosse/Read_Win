@@ -42,7 +42,6 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Build;
