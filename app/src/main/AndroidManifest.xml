@@ -31,19 +31,50 @@
             android:label="Login_Register_Activity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".BookActivity"></activity>
-        <activity android:name=".QuestionsActivity">
+        <activity android:name=".BookActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".QuestionsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Multiple_QuestionActivity" />
-        <activity android:name=".Pair_QuestionActivity" />
+
+        <activity android:name=".Multiple_QuestionActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".Pair_QuestionActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".RegisterActivity"
             android:label="Create an account"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".Splash"
+            android:configChanges="keyboard|keyboardHidden|orientation">
+        </activity>
+        <activity
+            android:name=".EasyPaint"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".EasyPaint" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EasyPaint" />
         </activity>
 
     </application>

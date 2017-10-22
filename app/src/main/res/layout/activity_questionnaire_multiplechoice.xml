@@ -8,29 +8,27 @@
     tools:context="bookmanager.chalmers.edu.readwin.Multiple_QuestionActivity">
 
     <TextView
-        android:id="@+id/textTitle_Book1"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:text="Title_Book1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="11dp"
         android:textSize="30sp"
-        android:paddingTop="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold|italic">
     </TextView>
 
 
     <TextView
-        android:id="@+id/textQuestion"
+        android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="11dp"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="20dp"
         android:text="Question 1"
-        android:textSize="20dp"
-        android:paddingTop="100dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="15dp">
+        android:textStyle="bold"
+        android:textSize="20dp">
     </TextView>
 
     <android.support.design.widget.FloatingActionButton
@@ -69,7 +67,7 @@
         android:id="@+id/radioButton1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textQuestion"
+        android:layout_below="@+id/question"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:textSize="20dp"
