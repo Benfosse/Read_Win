@@ -376,69 +376,12 @@ public class EasyPaint extends GraphicsActivity implements
 		mPaint.setAlpha(0xFF);
 
 		switch (item.getItemId()) {
-			case R.id.extract_color_menu: {
-				Toast.makeText(getApplicationContext(),
-							   R.string.tap_to_extract_color,
-							   Toast.LENGTH_LONG).show();
-				extractingColor = true;
-				return true;
-			}
 			case R.id.normal_brush_menu:
 				mPaint.setShader( null );
 				mPaint.setMaskFilter(null);
 				return true;
 			case R.id.color_menu:
 				new ColorPickerDialog(this, this, mPaint.getColor()).show();
-				return true;
-			case R.id.emboss_menu:
-				mPaint.setShader( null );
-				mPaint.setMaskFilter(mEmboss);
-				return true;
-			case R.id.smudge_menu: {
-				/* I considered making this what happens when the blur_menu item is selected, but
-				 * that could surprise users who are used to blur_menu's previous functionality, so
-				 * I made this new smudge_menu item instead. I don't like calling it "Smudge" because
-				 * this isn't exactly the same as what Photoshop and GIMP refer to as "Smudge", but I
-				 * couldn't think of a better name that isn't "Blur".
-				 * ~TheOpenSourceNinja
-				 */
-				if( Build.VERSION.SDK_INT >= 17 ) {
-					/* Basically what we're doing here is copying the entire foreground bitmap,
-					 * blurring it, then telling mPaint to use that instead of a solid color.
-					 */
-					
-					RenderScript rs = RenderScript.create( getApplicationContext( ) );
-					ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create( rs, Element.RGBA_8888( rs ) );
-					script.setRadius( 20f ); //The radius must be between 0 and 25. Smaller radius means less blur. I just picked 20 randomly. ~TheOpenSourceNinja
-					
-					//copy the foreground: (n API level 18+, this will be really fast because it uses a shared memory model, thus not really copying everything)
-					Allocation input = Allocation.createFromBitmap( rs, contentView.mBitmap );
-					script.setInput( input );
-					
-					//allocate memory for the output:
-					Allocation output = Allocation.createTyped( rs, input.getType( ) );
-					
-					//Blur the image:
-					script.forEach( output );
-					
-					//Store the blurred image as a Bitmap object:
-					Bitmap blurred = Bitmap.createBitmap( contentView.mBitmap );
-					output.copyTo( blurred );
-					
-					//Tell mPaint to use the blurred image:
-					Shader shader = new BitmapShader( blurred, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP );
-					mPaint.setShader( shader );
-					return true;
-				} else {
-					Toast.makeText( this.getApplicationContext( ),
-									R.string.ability_disabled_need_newer_api_level,
-									Toast.LENGTH_LONG ).show( );
-					return true;
-				}
-			}
-			case R.id.blur_menu:
-				mPaint.setShader( null );
-				mPaint.setMaskFilter(mBlur);
 				return true;
 			case R.id.size_menu: {
 				LayoutInflater inflater = ( LayoutInflater ) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -465,12 +408,12 @@ public class EasyPaint extends GraphicsActivity implements
 								getResources( ).getString(
 										R.string.your_selected_size_is ), progress + 1 ) );
 					}
-	
+
 					@Override
 					public void onStartTrackingTouch( SeekBar seekBar ) {
 						// TODO Auto-generated method stub
 					}
-	
+
 					@Override
 					public void onStopTrackingTouch( SeekBar seekBar ) {
 						// TODO Auto-generated method stub
@@ -503,11 +446,11 @@ public class EasyPaint extends GraphicsActivity implements
 								getResources( ).getString(
 										R.string.your_selected_size_is ), progress + 1 ) );
 					}
-	
+
 					public void onStartTrackingTouch( SeekBar seekBar ) {
 						// TODO Auto-generated method stub
 					}
-	
+
 					public void onStopTrackingTouch( SeekBar seekBar ) {
 						// TODO Auto-generated method stub
 					}
@@ -522,42 +465,6 @@ public class EasyPaint extends GraphicsActivity implements
 			}
 			case R.id.save_menu:
 				takeScreenshot(true);
-				break;
-			case R.id.share_menu: {
-				File screenshotPath = takeScreenshot( false );
-				Intent i = new Intent( );
-				i.setAction( Intent.ACTION_SEND );
-				i.setType( "image/png" );
-				i.putExtra( Intent.EXTRA_SUBJECT,
-							getString( R.string.share_title_template ) );
-				i.putExtra( Intent.EXTRA_TEXT,
-							getString( R.string.share_text_template ) );
-				i.putExtra( Intent.EXTRA_STREAM, Uri.fromFile( screenshotPath ) );
-				try {
-					startActivity( Intent.createChooser( i,
-														 getString( R.string.toolbox_share_title ) ) );
-				} catch( android.content.ActivityNotFoundException ex ) {
-					Toast.makeText( this.getApplicationContext( ),
-									R.string.no_way_to_share,
-									Toast.LENGTH_LONG ).show( );
-				}
-				break;
-			}
-			case R.id.open_image_menu: {
-				Intent intent = new Intent( );
-				intent.setType( "image/*" ); //The argument is an all-lower-case MIME type - in this case, any image format.
-				intent.setAction( Intent.ACTION_GET_CONTENT );
-				intent.putExtra( Intent.EXTRA_ALLOW_MULTIPLE, false ); //This is false by default, but I felt that for code clarity it was better to be explicit: we only want one image
-				startActivityForResult( Intent.createChooser( intent, getResources().getString( R.string.select_image_to_open ) ), CHOOSE_IMAGE );
-				break;
-			}
-			case R.id.fill_background_with_color: {
-				waitingForBackgroundColor = true;
-				new ColorPickerDialog( this, this, contentView.mBitmapBackground.getPixel( 0, 0 ) ).show();
-				return true;
-			}
-			case R.id.about_menu:
-				startActivity(new Intent(this, AboutActivity.class));
 				break;
 		}
 		return super.onOptionsItemSelected(item);
