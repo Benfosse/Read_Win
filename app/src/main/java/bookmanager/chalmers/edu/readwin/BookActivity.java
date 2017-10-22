@@ -47,7 +47,7 @@ public class BookActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     Intent bookQuestionsIntent = new Intent(BookActivity.this,
-                            Multiple_QuestionActivity.class);
+                            QuestionsActivity.class);
 
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("book", book);

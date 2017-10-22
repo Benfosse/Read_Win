@@ -40,14 +40,10 @@
             android:theme="@style/AppTheme"></activity>
         <activity android:name=".QuestionsActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".Multiple_QuestionActivity"
+        <activity android:name=".MultipleQuestionFragment"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Pair_QuestionActivity"
+        <activity android:name=".PairQuestionFragment"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".RegisterActivity"

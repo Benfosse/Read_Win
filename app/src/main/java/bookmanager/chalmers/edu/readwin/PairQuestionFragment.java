@@ -1,52 +1,86 @@
 package bookmanager.chalmers.edu.readwin;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import bookmanager.chalmers.edu.readwin.models.Book;
-import bookmanager.chalmers.edu.readwin.models.Pair_Question;
+import bookmanager.chalmers.edu.readwin.models.MultipleQuestion;
+import bookmanager.chalmers.edu.readwin.models.PairQuestion;
+import bookmanager.chalmers.edu.readwin.models.Question;
 
-public class Pair_QuestionActivity extends AppCompatActivity {
+public class PairQuestionFragment extends Fragment {
+
+    private View rootView;
 
     FloatingActionButton next, prev;
     int question_index, n_of_questions;
-    TextView Option1, Option2, Option3, Option4, OptionA, OptionB, OptionC, OptionD, Heading;
+    TextView Option1, Option2, Option3, Option4, OptionA, OptionB, OptionC, OptionD, Question;
+    private Question currentQuestion;
+    private Book currentBook;
+
+    public PairQuestionFragment() {
+    }
+
+    public static PairQuestionFragment newInstance(int questionIndex, int questionsSize, Question question, Book book) {
+        PairQuestionFragment fragment = new PairQuestionFragment();
+        Bundle args = new Bundle();
+        args.putInt("QuestionIndex", questionIndex);
+        args.putInt("QuestionsSize", questionsSize);
+        args.putParcelable("Question", question);
+        args.putParcelable("Book", book);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_questionnaire_pair);
-
-        Heading = (TextView)findViewById(R.id.heading);
-
-        Option1 = (TextView)findViewById(R.id.option1);
-        Option2 = (TextView)findViewById(R.id.option2);
-        Option3 = (TextView)findViewById(R.id.option3);
-        Option4 = (TextView)findViewById(R.id.option4);
-        OptionA = (TextView)findViewById(R.id.optionA);
-        OptionB = (TextView)findViewById(R.id.optionB);
-        OptionC = (TextView)findViewById(R.id.optionC);
-        OptionD = (TextView)findViewById(R.id.optionD);
-
-        Heading.setText(getIntent().getStringExtra("Heading"));
+    }
 
 
-        n_of_questions = getIntent().getIntExtra("N_of_Quesions", 0);
-        question_index = getIntent().getIntExtra("index", -1);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+
+        rootView = inflater.inflate(R.layout.fragment_questionnaire_pair, container, false);
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null) {
+            question_index = bundle.getInt("QuestionIndex");
+            n_of_questions = bundle.getInt("QuestionsSize");
+            currentQuestion = bundle.getParcelable("Question");
+            currentBook = bundle.getParcelable("Book");
+        }
+
+        PairQuestion pQuestion = currentQuestion.getPair();
+
+        TextView title = rootView.findViewById(R.id.pairQuestionTitle);
+        Question = (TextView) rootView.findViewById(R.id.pairQuestion);
+        Option1 = (TextView) rootView.findViewById(R.id.option1);
+        Option2 = (TextView) rootView.findViewById(R.id.option2);
+        Option3 = (TextView) rootView.findViewById(R.id.option3);
+        Option4 = (TextView) rootView.findViewById(R.id.option4);
+        OptionA = (TextView) rootView.findViewById(R.id.optionA);
+        OptionB = (TextView) rootView.findViewById(R.id.optionB);
+        OptionC = (TextView) rootView.findViewById(R.id.optionC);
+        OptionD = (TextView) rootView.findViewById(R.id.optionD);
+
+        title.setText(currentBook.getTitle());
+        Question.setText(pQuestion.getHeading());
 
         Disable(OptionA);
         Disable(OptionB);
         Disable(OptionC);
         Disable(OptionD);
-
 
         Option1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,19 +167,14 @@ public class Pair_QuestionActivity extends AppCompatActivity {
         });
 
 
-        next = (FloatingActionButton) findViewById(R.id.next_Button);
-        prev = (FloatingActionButton) findViewById(R.id.prev_Button);
-
-        question_index = getIntent().getIntExtra("index", -1);
+        next = (FloatingActionButton) rootView.findViewById(R.id.next_Button);
+        prev = (FloatingActionButton) rootView.findViewById(R.id.prev_Button);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(question_index < n_of_questions) {
-                    Intent data = new Intent();
-                    data.putExtra("index", question_index + 1);
-                    setResult(RESULT_OK, data);
-                    finish();
+
                 }
             }
         });
@@ -154,13 +183,16 @@ public class Pair_QuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(question_index > 0) {
-                    Intent data = new Intent();
-                    data.putExtra("index", question_index - 1);
-                    setResult(RESULT_OK, data);
-                    finish();
+
                 }
             }
         });
+
+        return rootView;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
     }
 
     private void Enable(TextView text) {

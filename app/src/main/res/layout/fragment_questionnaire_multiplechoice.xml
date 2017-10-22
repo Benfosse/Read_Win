@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="bookmanager.chalmers.edu.readwin.Multiple_QuestionActivity">
+    tools:context="bookmanager.chalmers.edu.readwin.MultipleQuestionFragment">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/multipleQuestionTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title_Book1"
@@ -20,11 +20,11 @@
 
 
     <TextView
-        android:id="@+id/question"
+        android:id="@+id/multipleQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="11dp"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/multipleQuestionTitle"
         android:layout_marginTop="20dp"
         android:text="Question 1"
         android:textStyle="bold"
@@ -67,7 +67,7 @@
         android:id="@+id/radioButton1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/question"
+        android:layout_below="@+id/multipleQuestion"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:textSize="20dp"
