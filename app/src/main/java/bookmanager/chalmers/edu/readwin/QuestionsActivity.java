@@ -30,6 +30,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
             case "Multiple":
                 Intent multiple = new Intent(QuestionsActivity.this, Multiple_QuestionActivity.class);
+                multiple.putExtra("N_of_Questions", questions.size());
                 multiple.putExtra("index", question_index);
                 multiple.putExtra("question_number", questions.get(question_index).getQuestionNumber());
                 multiple.putExtra("Question", questions.get(question_index).getMultiple().getQuestion());
@@ -39,6 +40,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
             case "Pair":
                 Intent pair = new Intent(QuestionsActivity.this, Pair_QuestionActivity.class);
+                pair.putExtra("N_of_Questions", questions.size());
                 pair.putExtra("index", question_index);
                 pair.putExtra("question_number", questions.get(question_index).getQuestionNumber());
                 pair.putExtra("Heading", questions.get(question_index).getPair().getHeading());
@@ -61,14 +63,7 @@ public class QuestionsActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == RESULT_MULTIPLE) {
             if (data != null) {
                 int temp = data.getIntExtra("index", -1);
-                if(temp < questions.size()) {
-                    if (temp < 0)
-                        question_index = 0;
-                    else
                         question_index = temp;
-                }
-                else
-                    question_index = questions.size() - 1;
             }
         }
     }

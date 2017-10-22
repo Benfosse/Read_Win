@@ -18,7 +18,7 @@ public class Multiple_QuestionActivity extends AppCompatActivity {
     RadioButton ans1, ans2, ans3, ans4;
     TextView question;
     FloatingActionButton next, prev;
-    int question_index;
+    int question_index, n_of_questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class Multiple_QuestionActivity extends AppCompatActivity {
         ans2 = (RadioButton)findViewById(R.id.radioButton2);
         ans3 = (RadioButton)findViewById(R.id.radioButton3);
         ans4 = (RadioButton)findViewById(R.id.radioButton4);
-        question = (TextView)findViewById(R.id.textQuestion);
+        question = (TextView)findViewById(R.id.question);
         next = (FloatingActionButton) findViewById(R.id.next_Button);
         prev = (FloatingActionButton) findViewById(R.id.prev_Button);
 
@@ -43,6 +43,7 @@ public class Multiple_QuestionActivity extends AppCompatActivity {
         ans4.setText(options[3]);
 
         question_index = getIntent().getIntExtra("index", -1);
+        n_of_questions = getIntent().getIntExtra("N_of_Questions", -1);
 
         ans1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,20 +88,24 @@ public class Multiple_QuestionActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent data = new Intent();
-                data.putExtra("index", question_index+1);
-                setResult(RESULT_OK, data);
-                finish();
+                if(question_index < n_of_questions) {
+                    Intent data = new Intent();
+                    data.putExtra("index", question_index + 1);
+                    setResult(RESULT_OK, data);
+                    finish();
+                }
             }
         });
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent data = new Intent();
-                data.putExtra("index", question_index-1);
-                setResult(RESULT_OK, data);
-                finish();
+                if(question_index > 0) {
+                    Intent data = new Intent();
+                    data.putExtra("index", question_index - 1);
+                    setResult(RESULT_OK, data);
+                    finish();
+                }
             }
         });
     }
