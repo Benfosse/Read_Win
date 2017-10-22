@@ -376,10 +376,6 @@ public class EasyPaint extends GraphicsActivity implements
 		mPaint.setAlpha(0xFF);
 
 		switch (item.getItemId()) {
-			case R.id.normal_brush_menu:
-				mPaint.setShader( null );
-				mPaint.setMaskFilter(null);
-				return true;
 			case R.id.color_menu:
 				new ColorPickerDialog(this, this, mPaint.getColor()).show();
 				return true;
