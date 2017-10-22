@@ -5,36 +5,30 @@
     <item
         android:id="@+id/color_menu"
         android:icon="@drawable/color"
-        app:showAsAction="always"
+        android:showAsAction="always"
         android:title="@string/color"/>
     <item
         android:id="@+id/size_menu"
         android:icon="@drawable/size"
-        app:showAsAction="always"
+        android:showAsAction="always"
         android:title="@string/brush_size">
     </item>
     <item
         android:id="@+id/erase_menu"
         android:icon="@drawable/erase"
-        app:showAsAction="always"
+        android:showAsAction="always"
         android:title="@string/erase">
     </item>
     <item
         android:id="@+id/clear_all_menu"
         android:icon="@drawable/clear_all"
-        app:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="@string/clear_all">
-    </item>
-    <item
-        android:id="@+id/normal_brush_menu"
-        android:icon="@drawable/size"
-        app:showAsAction="ifRoom"
-        android:title="@string/normal">
     </item>
     <item
         android:id="@+id/save_menu"
         android:icon="@drawable/save"
-        app:showAsAction="always"
+        android:showAsAction="always"
         android:title="@string/save">
     </item>
 

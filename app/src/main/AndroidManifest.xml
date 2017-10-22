@@ -61,7 +61,8 @@
         </activity>
         <activity
             android:name=".EasyPaint"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:label="Avatar">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
