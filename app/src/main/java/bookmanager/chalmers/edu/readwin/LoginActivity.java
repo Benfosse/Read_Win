@@ -257,7 +257,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     mAuthTask.execute((Void) null);
 
                     Bundle bundle = getIntent().getExtras();
-                    Intent intent= new Intent(context, GameMainPage.class);
+                    Intent intent = new Intent(context,MyProfil.class);
+                    //Intent intent= new Intent(context, GameMainPage.class);
                     //intent.putExtra("userID",arr.get(i).getId());
                     intent.putExtra("user",arr.get(i));
                     startActivity(intent);

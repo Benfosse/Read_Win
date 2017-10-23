@@ -19,10 +19,12 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
         <activity
             android:name=".GameMainPage"
+            android:label="GameMainPage"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
@@ -36,38 +38,47 @@
         </activity>
         <activity
             android:name=".BookActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".QuestionsActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".QuestionsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".MultipleQuestionFragment"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".PairQuestionFragment"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".RegisterActivity"
             android:label="Create an account"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
 
         <activity
             android:name=".Splash"
-            android:configChanges="keyboard|keyboardHidden|orientation"></activity>
+            android:configChanges="keyboard|keyboardHidden|orientation">
+        </activity>
         <activity
             android:name=".EasyPaint"
-            android:label="Avatar"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:label="Avatar">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName=".EasyPaint">
+            android:parentActivityName=".EasyPaint" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".EasyPaint" />
         </activity>
+        <activity
+            android:name=".MyProfil"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".UserAccountActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
