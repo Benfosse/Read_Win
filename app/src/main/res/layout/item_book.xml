@@ -19,5 +19,7 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:textStyle="bold"
-        android:gravity="center_horizontal"/>
+        android:textColor="#fff"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dp" />
 </LinearLayout>

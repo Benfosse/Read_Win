@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="bookmanager.chalmers.edu.readwin.BookListFragment">
+    tools:context="bookmanager.chalmers.edu.readwin.BookListFragment"
+    android:background="@drawable/bookshelf">
 
     <TextView
         android:id="@+id/book_list_header"
@@ -19,7 +20,7 @@
         android:id="@+id/book_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="70dp"
