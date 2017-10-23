@@ -7,10 +7,12 @@ import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import bookmanager.chalmers.edu.readwin.models.Book;
 import bookmanager.chalmers.edu.readwin.models.MultipleQuestion;
@@ -170,21 +172,32 @@ public class PairQuestionFragment extends Fragment {
         next = (FloatingActionButton) rootView.findViewById(R.id.next_Button);
         prev = (FloatingActionButton) rootView.findViewById(R.id.prev_Button);
 
+        // Greying out prev button if it's the first question
+        if(question_index <= 0) {
+            prev.setAlpha(.5f);
+            prev.setClickable(false);
+        }
+
+        // Greying out next button if it's the last question
+        if(question_index == (n_of_questions - 1))
+        {
+            next.setAlpha(.5f);
+            next.setClickable(false);
+        }
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(question_index < n_of_questions) {
-
-                }
+                if(question_index < (n_of_questions - 1))
+                    ((QuestionsActivity)getActivity()).setCurrentQuestion(question_index + 1, true);
             }
         });
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(question_index > 0) {
-
-                }
+                if(question_index > 0)
+                    ((QuestionsActivity)getActivity()).setCurrentQuestion(question_index - 1, true);
             }
         });
 

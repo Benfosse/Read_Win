@@ -93,6 +93,11 @@ public class QuestionsActivity extends AppCompatActivity {
         }
     }
 
+    // Used as a helper func to navigate within the fragments via button clicks
+    public void setCurrentQuestion (int item, boolean smoothScroll) {
+        mViewPager.setCurrentItem(item, smoothScroll);
+    }
+
     public class QuestionsPagerAdapter extends FragmentPagerAdapter {
 
         public QuestionsPagerAdapter(FragmentManager fm) {
