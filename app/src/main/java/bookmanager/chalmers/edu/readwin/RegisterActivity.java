@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getWindow().setBackgroundDrawableResource(R.drawable.background);
 
         mUsername = (EditText) findViewById(R.id.usernameform);
         mFirstname = (EditText) findViewById(R.id.firstnameform);
