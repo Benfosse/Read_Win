@@ -86,6 +86,18 @@ public class PairQuestionFragment extends Fragment {
         title.setText(currentBook.getTitle());
         Question.setText(pQuestion.getHeading());
 
+        String[] letters = pQuestion.getLetterColumn();
+        Option1.setText(letters[0]);
+        Option2.setText(letters[1]);
+        Option3.setText(letters[2]);
+        Option4.setText(letters[3]);
+
+        String[] numbers = pQuestion.getNumberColumn();
+        OptionA.setText(numbers[0]);
+        OptionB.setText(numbers[1]);
+        OptionC.setText(numbers[2]);
+        OptionD.setText(numbers[3]);
+
         Disable(OptionA);
         Disable(OptionB);
         Disable(OptionC);
