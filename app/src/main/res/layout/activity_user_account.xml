@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="bookmanager.chalmers.edu.readwin.UserAccountActivity"
+    android:background="@drawable/general_background" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"/>
+
+    <TextView
+        android:id="@+id/account_username"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="#fff"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="130dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp"/>
+
+    <TextView
+        android:id="@+id/account_first_name"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:textColor="#fff"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="130dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="30dp" />
+
+    <TextView
+        android:id="@+id/account_last_name"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textColor="#fff"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="130dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year of Birth: "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="30dp" />
+
+    <TextView
+        android:id="@+id/account_date_of_birth"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="Year of Birth"
+        android:inputType="number"
+        android:textColor="#fff"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="130dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email : "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="30dp" />
+
+    <TextView
+        android:id="@+id/account_email"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="#fff"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="130dp" />
+</RelativeLayout>

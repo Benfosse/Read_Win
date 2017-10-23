@@ -2,9 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="bookmanager.chalmers.edu.readwin.GameMainPage">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/user_account"
+        android:icon="@drawable/user_account"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="User Account"
+        app:showAsAction="ifRoom" />
 </menu>

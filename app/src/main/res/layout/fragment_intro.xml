@@ -11,8 +11,8 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:text="Intro"
-        android:textSize="28dp"
-        android:textStyle="bold"/>
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"

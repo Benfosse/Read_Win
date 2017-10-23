@@ -33,18 +33,20 @@
 
     <ImageButton
         android:id="@+id/age_category_left"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="25dp"
-        app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/arrow_left" />
 
     <ImageButton
         android:id="@+id/age_category_right"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="310dp"
-        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/arrow_righ" />
 
 </FrameLayout>
