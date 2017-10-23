@@ -12,5 +12,5 @@ import bookmanager.chalmers.edu.readwin.models.Question;
 public interface IQuestionService {
     List<Question> getBookQuestions(int bookId);
     Question getBookQuestion(int bookId, int questionNumber);
-    void answerBookQuestions(int bookId, List<Answer> answers);
+    int answerBookQuestions(int bookId, List<Answer> answers);
 }

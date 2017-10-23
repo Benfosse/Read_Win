@@ -154,7 +154,14 @@
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
         android:text="1.  a)\n2.  b)\n3.  c)\n4.  d)"/>
-    
 
+    <Button
+        android:id="@+id/finishedWithQuestionsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Finish"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="440dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

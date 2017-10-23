@@ -11,15 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bookmanager.chalmers.edu.readwin.models.Answer;
 import bookmanager.chalmers.edu.readwin.models.Book;
 import bookmanager.chalmers.edu.readwin.models.MultipleQuestion;
 import bookmanager.chalmers.edu.readwin.models.Question;
+import bookmanager.chalmers.edu.readwin.services.QuestionService;
 
 public class MultipleQuestionFragment extends Fragment {
 
@@ -76,6 +82,7 @@ public class MultipleQuestionFragment extends Fragment {
         ans4 = (RadioButton) rootView.findViewById(R.id.radioButton4);
         next = (FloatingActionButton) rootView.findViewById(R.id.next_Button);
         prev = (FloatingActionButton) rootView.findViewById(R.id.prev_Button);
+        Button finishQuestionsButton = rootView.findViewById(R.id.finishedWithQuestionsButton);
 
         title.setText(currentBook.getTitle());
         question.setText(mQuestion.getQuestion());
@@ -85,6 +92,11 @@ public class MultipleQuestionFragment extends Fragment {
         ans2.setText(options[1]);
         ans3.setText(options[2]);
         ans4.setText(options[3]);
+
+        ans1.setChecked(false);
+        ans2.setChecked(false);
+        ans3.setChecked(false);
+        ans4.setChecked(false);
 
         ans1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +148,7 @@ public class MultipleQuestionFragment extends Fragment {
         {
             next.setAlpha(.5f);
             next.setClickable(false);
+            finishQuestionsButton.setVisibility(View.VISIBLE);
         }
 
 
@@ -152,6 +165,17 @@ public class MultipleQuestionFragment extends Fragment {
             public void onClick(View view) {
                 if(question_index > 0)
                     ((QuestionsActivity)getActivity()).setCurrentQuestion(question_index - 1, true);
+            }
+        });
+
+        finishQuestionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                QuestionService questionService = new QuestionService();
+                List<Answer> answers = new ArrayList<Answer>();
+                int points = questionService.answerBookQuestions(currentBook.getId(), answers);
+                getActivity().finish();
+                Toast.makeText(getContext(), "You got x out of " + n_of_questions + " questions correct! Congratulation you have earned your self " + points + " points!" , Toast.LENGTH_SHORT).show();
             }
         });
 

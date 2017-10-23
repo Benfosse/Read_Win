@@ -43,8 +43,17 @@ public class QuestionService implements IQuestionService {
             return null;
     }
 
-    public void answerBookQuestions(int bookId, List<Answer> answers) {
+    public int answerBookQuestions(int bookId, List<Answer> answers) {
 
+        if(bookId == 1) {
+
+
+
+            return 100;
+        }
+        else {
+            return 0;
+        }
     }
 
 }

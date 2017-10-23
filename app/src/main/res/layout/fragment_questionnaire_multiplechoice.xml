@@ -65,51 +65,72 @@
 
     <RadioButton
         android:id="@+id/radioButton1"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/multipleQuestion"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:textSize="20dp"
-        android:text="RadioButton" />
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="RadioButton"
+        android:padding="5dp" />
 
     <RadioButton
         android:id="@+id/radioButton2"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/radioButton1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:text="RadioButton" />
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="RadioButton"
+        android:padding="5dp" />
 
     <RadioButton
         android:id="@+id/radioButton3"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/radioButton2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:text="RadioButton" />
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="RadioButton"
+        android:padding="5dp" />
 
     <RadioButton
         android:id="@+id/radioButton4"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/radioButton3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:text="RadioButton" />
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="RadioButton"
+        android:padding="5dp" />
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/finishedWithQuestionsButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioButton4"
-        android:layout_marginTop="40dp"/>
-
-
+        android:text="Finish"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="440dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>
 
