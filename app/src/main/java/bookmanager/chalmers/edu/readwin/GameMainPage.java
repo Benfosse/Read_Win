@@ -14,6 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
+import bookmanager.chalmers.edu.readwin.models.User;
+
 public class GameMainPage extends AppCompatActivity {
 
     /**
@@ -45,6 +49,9 @@ public class GameMainPage extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        Bundle b = getIntent().getExtras();
+        User user1 = (User)b.get("user");
+        System.out.println("User id " + user1.getId());
 
     }
 
