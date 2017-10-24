@@ -15,7 +15,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="11dp"
         android:textSize="30sp"
-        android:textStyle="bold|italic">
+        android:textStyle="bold|italic"
+        android:textColor="#fff" >
     </TextView>
 
 
@@ -28,7 +29,8 @@
         android:layout_marginTop="20dp"
         android:text="Question 1"
         android:textStyle="bold"
-        android:textSize="20dp">
+        android:textSize="20dp"
+        android:textColor="#fff" >
     </TextView>
 
     <android.support.design.widget.FloatingActionButton
