@@ -83,7 +83,7 @@ public class RankingFragment extends Fragment {
         ListView rankingList = rootView.findViewById(R.id.ranking_list);
         List<UserScore> userScores = new RankingService(getContext()).getRankings(null, 0).getUserScores();
         Collections.sort(userScores);
-        rankingList.setAdapter(new ArrayAdapter<UserScore>(getContext(), android.R.layout.simple_list_item_1, userScores));
+        rankingList.setAdapter(new ArrayAdapter<UserScore>(getContext(), R.layout.ranking_view_text, userScores));
 
         return rootView;
     }

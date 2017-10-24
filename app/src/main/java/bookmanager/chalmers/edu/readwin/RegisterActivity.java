@@ -135,6 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             UserService userService = new UserService(getApplicationContext());
             userService.createUser(username, email, firstname, lastname, yearofbirth, null, password);
+
             Intent gameMainPage = new Intent(this, GameMainPage.class);
             startActivity(gameMainPage);
         }

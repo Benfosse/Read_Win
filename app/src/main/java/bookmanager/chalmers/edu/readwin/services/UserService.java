@@ -120,7 +120,6 @@ public class UserService implements IUserService {
     // TODO: Make private or remove function when we start using api
     public User getUser(String email) {
         List<User> users = getUserList();
-
         for(User user: users) {
             if(user.getEmail().equals(email))
                 return user;
@@ -162,4 +161,5 @@ public class UserService implements IUserService {
                     + "\nEmail: " + u.getEmail() + "\nPassword: " + u.getPassword());
         }
     }
+
 }
