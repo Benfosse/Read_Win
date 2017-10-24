@@ -70,7 +70,7 @@ public class GameMainPage extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.user_account) {
             Intent userAccountIntent = new Intent(GameMainPage.this,
-                            UserAccountActivity.class);
+                            Splash.class);
 
             startActivity(userAccountIntent);
 

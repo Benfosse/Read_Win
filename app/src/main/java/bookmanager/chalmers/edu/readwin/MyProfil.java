@@ -46,7 +46,10 @@ public class MyProfil extends AppCompatActivity {
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle b = getIntent().getExtras();
+                User user1 = (User)b.get("user");
                 Intent splash = new Intent(context, Splash.class);
+                splash.putExtra("user",user1);
                 startActivity(splash);
             }
         });

@@ -17,11 +17,14 @@
 
 package bookmanager.chalmers.edu.readwin;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -29,6 +32,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapShader;
@@ -43,15 +47,19 @@ import android.graphics.Point;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -71,6 +79,8 @@ public class EasyPaint extends GraphicsActivity implements
 	public static int DEFAULT_BRUSH_SIZE = 10;
 	private static int MAX_POINTERS = 10;
 	private static final float TOUCH_TOLERANCE = 4;
+	private static final int PERMISSION_REQUEST_CODE = 1;
+
 
 	private Paint mPaint;
 	private MaskFilter mEmboss;
@@ -92,6 +102,10 @@ public class EasyPaint extends GraphicsActivity implements
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		contentView = new MyView( this );
 		setContentView( contentView );
+		/*if ((Build.VERSION.SDK_INT >= 23) && (!checkPermission())){
+				requestPermission(); // Code for permission
+			}*/
+
 
 		mPaint = new Paint();
 		mPaint.setAntiAlias(true);
@@ -108,7 +122,7 @@ public class EasyPaint extends GraphicsActivity implements
 
 		mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
 
-		if (isFirstTime()) {
+	/*	if (isFirstTime()) {
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 			alert.setTitle(R.string.app_name);
@@ -123,10 +137,10 @@ public class EasyPaint extends GraphicsActivity implements
 					});
 
 			alert.show();
-		} else {
+		} else {*/
 			Toast.makeText(getApplicationContext(),
 					R.string.here_is_your_canvas, Toast.LENGTH_SHORT).show();
-		}
+		//}
 
 		loadFromIntents();
 	}
@@ -460,8 +474,21 @@ public class EasyPaint extends GraphicsActivity implements
 				return true;
 			}
 			case R.id.save_menu:
-				takeScreenshot(true);
-				break;
+				//takeScreenshot(true);
+				/*Bitmap bitmap = takeScreenshot();
+				saveBitmap(bitmap);*/
+				try {
+					takeScreenshot2();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				finish();
+				/*try {
+					takeScreenshot2();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}*/
+				//break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -580,6 +607,75 @@ public class EasyPaint extends GraphicsActivity implements
 				setBackgroundUri( (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM) );
 			}
 
+		}
+	}
+
+	/*public Bitmap takeScreenshot() {
+		View rootView = findViewById(android.R.id.content).getRootView();
+		rootView.setDrawingCacheEnabled(true);
+		return rootView.getDrawingCache();
+	}*/
+
+	/*public void saveBitmap(Bitmap bitmap) {
+		File imagePath = new File(Environment.getExternalStorageDirectory() + "/avatar.png"); ////File imagePath
+		System.out.println("Stockage : " + Environment.getExternalStorageDirectory() + "/avatar.png");
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(imagePath);
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+			fos.flush();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			Log.e("GREC", e.getMessage(), e);
+		} catch (IOException e) {
+			Log.e("GREC", e.getMessage(), e);
+		}
+	}*/
+
+	private void takeScreenshot2() throws IOException {
+		Bitmap bitmap;
+		View v1 = findViewById(android.R.id.content);// get ur root view id
+		v1.setDrawingCacheEnabled(true);
+		bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+		v1.setDrawingCacheEnabled(false);
+		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+		File f = new File(Environment.getExternalStorageDirectory()
+				+ File.separator + "avatar.png");
+		f.createNewFile();
+		FileOutputStream fo = new FileOutputStream(f);
+		fo.write(bytes.toByteArray());
+		fo.close();
+	}
+
+	private boolean checkPermission() {
+		int result = ContextCompat.checkSelfPermission(EasyPaint.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+		if (result == PackageManager.PERMISSION_GRANTED) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private void requestPermission() {
+
+		if (ActivityCompat.shouldShowRequestPermissionRationale(EasyPaint.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+			Toast.makeText(EasyPaint.this, "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+		} else {
+			ActivityCompat.requestPermissions(EasyPaint.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case PERMISSION_REQUEST_CODE:
+				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					Log.e("value", "Permission Granted, Now you can use local drive .");
+				} else {
+					Log.e("value", "Permission Denied, You cannot use local drive .");
+				}
+				break;
 		}
 	}
 }
