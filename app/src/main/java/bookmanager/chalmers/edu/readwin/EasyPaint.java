@@ -102,9 +102,9 @@ public class EasyPaint extends GraphicsActivity implements
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		contentView = new MyView( this );
 		setContentView( contentView );
-		/*if ((Build.VERSION.SDK_INT >= 23) && (!checkPermission())){
+		if ((Build.VERSION.SDK_INT >= 23) && (!checkPermission())){
 				requestPermission(); // Code for permission
-			}*/
+			}
 
 
 		mPaint = new Paint();
