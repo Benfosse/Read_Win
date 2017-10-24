@@ -52,100 +52,131 @@
         android:textStyle="bold">
     </TextView>
 
-    <TextView
+    <RadioButton
         android:id="@+id/option1"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/pairQuestion"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="36dp"
-        android:textColor="#000000"
-        android:text="Option 1." />
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="1."
+        android:padding="5dp" />
 
-    <TextView
+    <RadioButton
         android:id="@+id/optionA"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:layout_below="@+id/pairQuestion"
         android:layout_alignBaseline="@+id/option1"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="11dp"
-        android:textColor="#000000"
-        android:text="Option a)" />
+        android:layout_marginRight="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="a)"
+        android:padding="5dp" />
 
 
-    <TextView
+    <RadioButton
         android:id="@+id/option2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginLeft="11dp"
         android:layout_below="@+id/option1"
-        android:layout_marginTop="22dp"
-        android:layout_centerVertical="true"
-        android:textColor="#000000"
-        android:text="Option 2." />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="2."
+        android:padding="5dp" />
 
-    <TextView
+    <RadioButton
         android:id="@+id/optionB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:layout_below="@+id/pairQuestion"
         android:layout_alignBaseline="@+id/option2"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="11dp"
-        android:textColor="#000000"
-        android:text="Option b)" />
+        android:layout_marginRight="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="b)"
+        android:padding="5dp" />
 
-    <TextView
+    <RadioButton
         android:id="@+id/option3"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginLeft="11dp"
         android:layout_below="@+id/option2"
-        android:layout_marginTop="22dp"
-        android:layout_centerVertical="true"
-        android:textColor="#000000"
-        android:text="Option 3." />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="3."
+        android:padding="5dp" />
 
-    <TextView
+    <RadioButton
         android:id="@+id/optionC"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:layout_below="@+id/pairQuestion"
         android:layout_alignBaseline="@+id/option3"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="11dp"
-        android:textColor="#000000"
-        android:text="Option c)" />
+        android:layout_marginRight="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="c)"
+        android:padding="5dp" />
 
-    <TextView
+    <RadioButton
         android:id="@+id/option4"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginLeft="11dp"
         android:layout_below="@+id/option3"
-        android:layout_marginTop="22dp"
-        android:layout_centerVertical="true"
-        android:textColor="#000000"
-        android:text="Option 4." />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="4."
+        android:padding="5dp" />
 
-    <TextView
+    <RadioButton
         android:id="@+id/optionD"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:layout_below="@+id/pairQuestion"
         android:layout_alignBaseline="@+id/option4"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="11dp"
-        android:textColor="#000000"
-        android:text="Option d)" />
+        android:layout_marginRight="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:checked="true"
+        android:background="@drawable/question_button_background"
+        android:button="@android:color/transparent"
+        android:text="d)"
+        android:padding="5dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
