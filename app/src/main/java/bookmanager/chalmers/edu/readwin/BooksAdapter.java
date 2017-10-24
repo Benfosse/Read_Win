@@ -1,5 +1,7 @@
 package bookmanager.chalmers.edu.readwin;
 
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -12,6 +14,8 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import bookmanager.chalmers.edu.readwin.models.Book;
+import bookmanager.chalmers.edu.readwin.models.User;
+import bookmanager.chalmers.edu.readwin.services.UserService;
 
 /**
  * Created by benedikt on 18/10/2017.
@@ -23,6 +27,9 @@ public class BooksAdapter extends ArrayAdapter<Book> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        UserService userService = new UserService(getContext());
+        User user = userService.getCurrentUser();
+
         // Get the data item for this position
         Book book = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -32,14 +39,24 @@ public class BooksAdapter extends ArrayAdapter<Book> {
         // Lookup view for data population
         TextView bookTitle = convertView.findViewById(R.id.bookTitleList);
         ImageView bookImage = convertView.findViewById(R.id.bookImageList);
+        ImageView ribbon = convertView.findViewById(R.id.bookListRibbon);
 
         // Populate the data into the template view using the data object
         bookTitle.setText(book.getTitle());
         Picasso.with(getContext()).load(book.getImage()).into(bookImage);
 
+        if(checkIfQuestionsFinished(user.getId(), book.getId()))
+            ribbon.setVisibility(View.VISIBLE);
+
         // Return the completed view to render on screen
         return convertView;
     }
 
+    private Boolean checkIfQuestionsFinished(int userId, int bookId) {
+        SharedPreferences sharedpreferences = getContext().getSharedPreferences("questionsAnswered", Context.MODE_PRIVATE);
+
+        String hasRead = sharedpreferences.getString(userId + "-" + bookId, "");
+        return hasRead.equals("Finished");
+    }
 
 }

@@ -2,6 +2,7 @@ package bookmanager.chalmers.edu.readwin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -30,7 +31,9 @@ import bookmanager.chalmers.edu.readwin.models.Book;
 import bookmanager.chalmers.edu.readwin.models.MultipleQuestion;
 import bookmanager.chalmers.edu.readwin.models.PairQuestion;
 import bookmanager.chalmers.edu.readwin.models.Question;
+import bookmanager.chalmers.edu.readwin.models.User;
 import bookmanager.chalmers.edu.readwin.services.QuestionService;
+import bookmanager.chalmers.edu.readwin.services.UserService;
 
 public class PairQuestionFragment extends Fragment {
 
@@ -40,6 +43,7 @@ public class PairQuestionFragment extends Fragment {
     int question_index, n_of_questions;
     RadioButton Option1, Option2, Option3, Option4, OptionA, OptionB, OptionC, OptionD;
     TextView Question;
+    User currentUser;
     private Question currentQuestion;
     private Book currentBook;
     private Integer[] answer = new Integer[4];
@@ -75,6 +79,9 @@ public class PairQuestionFragment extends Fragment {
                 Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_questionnaire_pair, container, false);
+
+        UserService userService = new UserService(getContext());
+        currentUser = userService.getCurrentUser();
 
         Bundle bundle = this.getArguments();
         if(bundle != null) {
@@ -288,6 +295,7 @@ public class PairQuestionFragment extends Fragment {
                 QuestionService questionService = new QuestionService();
                 List<Answer> answers = new ArrayList<Answer>();
                 int points = questionService.answerBookQuestions(currentBook.getId(), answers);
+                markQuestionsFinished();
                 getActivity().finish();
                 Toast.makeText(getContext(), "You got x out of " + n_of_questions + " questions correct! Congratulation you have earned your self " + points + " points!" , Toast.LENGTH_SHORT).show();
             }
@@ -417,4 +425,13 @@ public class PairQuestionFragment extends Fragment {
             OptionD.setChecked(false);
     }
 
+    private void markQuestionsFinished() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("questionsAnswered", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // User Id - Book Id
+        editor.putString(currentUser.getId() + "-" + currentBook.getId(), "Finished");
+        editor.commit();
+    }
 }

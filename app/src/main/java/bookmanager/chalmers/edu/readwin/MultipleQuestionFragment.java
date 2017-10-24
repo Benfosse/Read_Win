@@ -1,6 +1,8 @@
 package bookmanager.chalmers.edu.readwin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -18,14 +20,19 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import bookmanager.chalmers.edu.readwin.models.Answer;
 import bookmanager.chalmers.edu.readwin.models.Book;
 import bookmanager.chalmers.edu.readwin.models.MultipleQuestion;
 import bookmanager.chalmers.edu.readwin.models.Question;
+import bookmanager.chalmers.edu.readwin.models.User;
 import bookmanager.chalmers.edu.readwin.services.QuestionService;
+import bookmanager.chalmers.edu.readwin.services.UserService;
 
 public class MultipleQuestionFragment extends Fragment {
 
@@ -37,6 +44,7 @@ public class MultipleQuestionFragment extends Fragment {
     int question_index, n_of_questions;
     Question currentQuestion;
     Book currentBook;
+    User currentUser;
 
     public MultipleQuestionFragment() {
         // Required empty public constructor
@@ -63,6 +71,9 @@ public class MultipleQuestionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_questionnaire_multiplechoice, container, false);
+
+        UserService userService = new UserService(getContext());
+        currentUser = userService.getCurrentUser();
 
         Bundle bundle = this.getArguments();
         if(bundle != null) {
@@ -174,6 +185,7 @@ public class MultipleQuestionFragment extends Fragment {
                 QuestionService questionService = new QuestionService();
                 List<Answer> answers = new ArrayList<Answer>();
                 int points = questionService.answerBookQuestions(currentBook.getId(), answers);
+                markQuestionsFinished();
                 getActivity().finish();
                 Toast.makeText(getContext(), "You got x out of " + n_of_questions + " questions correct! Congratulation you have earned your self " + points + " points!" , Toast.LENGTH_SHORT).show();
             }
@@ -186,7 +198,29 @@ public class MultipleQuestionFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void saveAnswer() {
+    private void markQuestionsFinished() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("questionsAnswered", Context.MODE_PRIVATE);
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // User Id - Book Id
+        editor.putString(currentUser.getId() + "-" + currentBook.getId(), "Finished");
+        editor.commit();
+    }
+
+    private void saveAnswer(String answer) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("questions", Context.MODE_PRIVATE);
+
+        Answer answerObject = new Answer(question_index, answer);
+
+        Gson gson = new Gson();
+        String serializedAnswer = gson.toJson(answerObject);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // User Id - Book Id - Question Id
+        editor.putString(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index, serializedAnswer);
+        editor.putString(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index, serializedAnswer);
+        editor.commit();
     }
 }

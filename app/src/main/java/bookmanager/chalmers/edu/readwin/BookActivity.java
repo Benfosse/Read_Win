@@ -2,6 +2,7 @@ package bookmanager.chalmers.edu.readwin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,11 +16,17 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import bookmanager.chalmers.edu.readwin.models.Book;
+import bookmanager.chalmers.edu.readwin.models.PairQuestion;
+import bookmanager.chalmers.edu.readwin.models.User;
+import bookmanager.chalmers.edu.readwin.services.UserService;
 
 
 public class BookActivity extends AppCompatActivity {
 
     Context context;
+    User currentUser;
+    Book currentBook;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +34,10 @@ public class BookActivity extends AppCompatActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {
-            final Book book = bundle.getParcelable("book");
+            currentBook = bundle.getParcelable("book");
+
+            UserService userService = new UserService(getApplicationContext());
+            currentUser = userService.getCurrentUser();
 
             TextView title = (TextView) findViewById(R.id.bookTitle);
             TextView author = (TextView) findViewById(R.id.bookAuthor);
@@ -36,15 +46,51 @@ public class BookActivity extends AppCompatActivity {
             TextView description = (TextView) findViewById(R.id.bookDescription);
             ImageView imageView = (ImageView) findViewById(R.id.bookImage);
 
-            title.setText(book.getTitle());
-            author.setText(book.getAuthor());
-            date.setText(book.getDate());
-            genre.setText(book.getGenre());
-            description.setText(book.getDescription());
+            title.setText(currentBook.getTitle());
+            author.setText(currentBook.getAuthor());
+            date.setText(currentBook.getDate());
+            genre.setText(currentBook.getGenre());
+            description.setText(currentBook.getDescription());
 
-            Picasso.with(getApplicationContext()).load(book.getImage()).into(imageView);
+            Picasso.with(getApplicationContext()).load(currentBook.getImage()).into(imageView);
 
             Button startQuestionsButton = (Button) findViewById(R.id.startQuestionnaire);
+            ImageView ribbon = (ImageView) findViewById(R.id.bookRibbon);
+            if(checkIfQuestionsFinished(currentUser.getId(), currentBook.getId())) {
+                startQuestionsButton.setAlpha(.5f);
+                startQuestionsButton.setClickable(false);
+                ribbon.setVisibility(View.VISIBLE);
+            } else {
+                startQuestionsButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v){
+                        Intent bookQuestionsIntent = new Intent(BookActivity.this,
+                                QuestionsActivity.class);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("book", currentBook);
+                        bookQuestionsIntent.putExtras(bundle);
+
+                        startActivity(bookQuestionsIntent);
+                    }
+                });
+            }
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        Button startQuestionsButton = (Button) findViewById(R.id.startQuestionnaire);
+        ImageView ribbon = (ImageView) findViewById(R.id.bookRibbon);
+        if(checkIfQuestionsFinished(currentUser.getId(), currentBook.getId())) {
+            startQuestionsButton.setAlpha(.5f);
+            startQuestionsButton.setClickable(false);
+            ribbon.setVisibility(View.VISIBLE);
+        } else {
             startQuestionsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
@@ -52,7 +98,7 @@ public class BookActivity extends AppCompatActivity {
                             QuestionsActivity.class);
 
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("book", book);
+                    bundle.putParcelable("book", currentBook);
                     bookQuestionsIntent.putExtras(bundle);
 
                     startActivity(bookQuestionsIntent);
@@ -86,5 +132,12 @@ public class BookActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private Boolean checkIfQuestionsFinished(int userId, int bookId) {
+        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("questionsAnswered", Context.MODE_PRIVATE);
+
+        String hasRead = sharedpreferences.getString(userId + "-" + bookId, "");
+        return hasRead.equals("Finished");
     }
 }

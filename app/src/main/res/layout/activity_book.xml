@@ -87,4 +87,13 @@
         android:text="Start Questionnaire"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="440dp"/>
+
+    <ImageView
+        android:id="@+id/bookRibbon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="280dp"
+        android:background="@drawable/ribbon"
+        android:visibility="invisible"/>
 </RelativeLayout>
