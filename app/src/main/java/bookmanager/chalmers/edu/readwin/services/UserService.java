@@ -27,11 +27,6 @@ public class UserService implements IUserService {
     Context context; // TODO: Remove this when API has been implemented
 
     public UserService(Context context) {
-        //this.addUsers(this.createUser(0, "Error", "error@chalmers.se", "Error", "Error", 0000, "none", 0, passwordhash));
-        //this.addUsers(this.createUser(1, "Ben", "benjamin@chalmers.se", "Benjamin", "Fosse", 1995, "none", 0, passwordhash));
-        //this.addUsers(this.createUser(2, "Andre", "andre@chalmers.se", "Andre", "Ranito", 1994, "none", 0, passwordhash));
-        //this.addUsers(this.createUser(3, "Bene", "benedikt@chalmers.se", "Benedikt", "Sigurleifsson", 1992, "none", 0, passwordhash));
-        //this.addUsers(this.createUser(4, "Steph", "stephane@chalmers.se", "Stephane", "Wagner", 1995, "none", 0, passwordhash));
         this.context = context;
     }
 
@@ -102,7 +97,8 @@ public class UserService implements IUserService {
         return user;
     }
 
-    private List<User> getUserList() {
+    // TODO: Make private function when we start using api, being used in ranking service
+    public List<User> getUserList() {
         try {
             SharedPreferences sharedpreferences = context.getSharedPreferences("users", Context.MODE_PRIVATE);
             Gson gson = new Gson();

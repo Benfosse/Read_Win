@@ -56,9 +56,6 @@ public class QuestionService implements IQuestionService {
     public int answerBookQuestions(int bookId, List<Answer> answers) {
 
         if(bookId == 1) {
-
-
-
             return 100;
         }
         else {
