@@ -21,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -104,10 +106,37 @@ public class MultipleQuestionFragment extends Fragment {
         ans3.setText(options[2]);
         ans4.setText(options[3]);
 
-        ans1.setChecked(false);
-        ans2.setChecked(false);
-        ans3.setChecked(false);
-        ans4.setChecked(false);
+        // Initializing answers to false unless they have been answered before
+        Answer answer = getAnswer();
+        if(answer == null) {
+            ans1.setChecked(false);
+            ans2.setChecked(false);
+            ans3.setChecked(false);
+            ans4.setChecked(false);
+        }
+        else {
+            if(answer.getAnswer().equals(options[0]))
+                ans1.setChecked(true);
+            else
+                ans1.setChecked(false);
+
+            if(answer.getAnswer().equals(options[1]))
+                ans2.setChecked(true);
+            else
+                ans2.setChecked(false);
+
+            if(answer.getAnswer().equals(options[2]))
+                ans3.setChecked(true);
+            else
+                ans3.setChecked(false);
+
+            if(answer.getAnswer().equals(options[3]))
+                ans4.setChecked(true);
+            else
+                ans4.setChecked(false);
+        }
+
+
 
         ans1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +145,7 @@ public class MultipleQuestionFragment extends Fragment {
                 ans2.setChecked(false);
                 ans3.setChecked(false);
                 ans4.setChecked(false);
+                saveAnswer(ans1.getText().toString());
             }
         });
 
@@ -126,6 +156,7 @@ public class MultipleQuestionFragment extends Fragment {
                 ans2.setChecked(true);
                 ans3.setChecked(false);
                 ans4.setChecked(false);
+                saveAnswer(ans2.getText().toString());
             }
         });
 
@@ -136,6 +167,7 @@ public class MultipleQuestionFragment extends Fragment {
                 ans2.setChecked(false);
                 ans3.setChecked(true);
                 ans4.setChecked(false);
+                saveAnswer(ans3.getText().toString());
             }
         });
 
@@ -146,6 +178,7 @@ public class MultipleQuestionFragment extends Fragment {
                 ans2.setChecked(false);
                 ans3.setChecked(false);
                 ans4.setChecked(true);
+                saveAnswer(ans4.getText().toString());
             }
         });
 
@@ -211,16 +244,51 @@ public class MultipleQuestionFragment extends Fragment {
     private void saveAnswer(String answer) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("questions", Context.MODE_PRIVATE);
 
+        List<Answer> answers = getAnswers();
+        Answer currentAnswer = getAnswer();
+
+        if(currentAnswer != null) {
+            for(int i = 0; i < answers.size(); i++) {
+                Answer a = answers.get(i);
+                if(a.getQuestionNumber() == currentAnswer.getQuestionNumber())
+                    answers.remove(i);
+            }
+        }
+
         Answer answerObject = new Answer(question_index, answer);
+        answers.add(answerObject);
 
         Gson gson = new Gson();
         String serializedAnswer = gson.toJson(answerObject);
+        String serializedAnswers = gson.toJson(answers);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         // User Id - Book Id - Question Id
+        editor.remove(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index);
         editor.putString(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index, serializedAnswer);
-        editor.putString(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index, serializedAnswer);
+
+        editor.remove(currentUser.getId() + "-" + currentBook.getId());
+        editor.putString(currentUser.getId() + "-" + currentBook.getId(), serializedAnswers);
+
         editor.commit();
+    }
+
+    private Answer getAnswer() {
+        SharedPreferences sharedpreferences = getContext().getSharedPreferences("questions", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        return gson.fromJson(sharedpreferences.getString(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index, ""), Answer.class);
+    }
+
+    private List<Answer> getAnswers() {
+        SharedPreferences sharedpreferences = getContext().getSharedPreferences("questions", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+
+        String list = sharedpreferences.getString(currentUser.getId() + "-" + currentBook.getId(), "");
+        Type answerListType = new TypeToken<List<Answer>>() {}.getType();
+        List<Answer> answerList = gson.fromJson(list, answerListType);
+        if(answerList == null)
+            return new ArrayList<Answer>();
+        return answerList;
     }
 }
