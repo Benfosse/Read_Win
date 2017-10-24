@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import bookmanager.chalmers.edu.readwin.models.User;
+
 public class Splash extends Activity {
 
 	Context context = this;
