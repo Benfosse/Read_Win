@@ -23,7 +23,7 @@ public class UserAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_account);
 
-        UserService userService = new UserService();
+        UserService userService = new UserService(getApplicationContext());
         currentUser = userService.getCurrentUser();
 
         TextView userName = (TextView) findViewById(R.id.account_username);

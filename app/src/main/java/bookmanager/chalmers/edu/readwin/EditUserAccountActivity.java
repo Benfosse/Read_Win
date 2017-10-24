@@ -126,7 +126,7 @@ public class EditUserAccountActivity extends AppCompatActivity {
                 modifiedUser.setEmail(email);
                 // TODO: Set password
 
-                UserService userService = new UserService();
+                UserService userService = new UserService(getApplicationContext());
                 userService.modifyCurrentUser(modifiedUser);
 
                 finish();

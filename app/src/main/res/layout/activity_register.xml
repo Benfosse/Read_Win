@@ -36,6 +36,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:hint="Username"
+        android:textColor="#fff"
         android:layout_alignBaseline="@+id/usernametxt"
         android:layout_alignParentRight="true"/>
 
@@ -53,6 +54,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:hint="First Name"
+        android:textColor="#fff"
         android:layout_alignBaseline="@+id/firstnametxt"
         android:layout_alignParentRight="true"/>
 
@@ -70,6 +72,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:hint="Last Name"
+        android:textColor="#fff"
         android:layout_alignBaseline="@+id/lastnametxt"
         android:layout_alignParentRight="true"/>
 
@@ -88,6 +91,7 @@
         android:layout_height="wrap_content"
         android:hint="Year of Birth"
         android:inputType="number"
+        android:textColor="#fff"
         android:layout_alignBaseline="@+id/dateofbirthtxt"
         android:layout_alignParentRight="true"/>
 
@@ -105,6 +109,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:hint="Email"
+        android:textColor="#fff"
         android:inputType="textEmailAddress"
         android:layout_alignBaseline="@+id/emailtxt"
         android:layout_alignParentRight="true"/>
@@ -123,6 +128,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:textColor="#fff"
         android:inputType="textPassword"
         android:layout_alignBaseline="@+id/passwordtxt"
         android:layout_alignParentRight="true"/>
