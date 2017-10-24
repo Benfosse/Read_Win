@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class PairQuestionFragment extends Fragment {
     private Integer[] answer = new Integer[4];
     private int number_selected = -1;
     private int letter_selected = -1;
+    private Boolean[] array_letters_selected = {false, false, false, false};
 
 
     MyImageView imageView;
@@ -131,64 +133,117 @@ public class PairQuestionFragment extends Fragment {
         Option1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                number_selected = 0;
-                update();
-//                test.dotWidth= 40;
-//                test.invalidate();
+
+                if(number_selected != 0) {
+                    number_selected = 0;
+                    update();
+                }
+                else {
+                    number_selected = -1;
+                    update();
+                }
 
             }
         });
         Option2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                number_selected = 1;
-                update();
+
+                if(number_selected != 1) {
+                    number_selected = 1;
+                    update();
+                }
+                else {
+                    number_selected = -1;
+                    update();
+                }
             }
         });
         Option3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                number_selected = 2;
-                update();
+
+                if(number_selected != 2) {
+                    number_selected = 2;
+                    update();
+                }
+                else {
+                    number_selected = -1;
+                    update();
+                }
             }
         });
         Option4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                number_selected = 3;
-                update();
+
+                if(number_selected != 3) {
+                    number_selected = 3;
+                    update();
+                }
+                else {
+                    number_selected = -1;
+                    update();
+                }
             }
         });
 
         OptionA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                letter_selected = 0;
-                update();
+
+                if(letter_selected != 0) {
+                    letter_selected = 0;
+                    update();
+                }
+                else {
+                    letter_selected = -1;
+                    update();
+                }
             }
         });
 
         OptionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                letter_selected = 1;
-                update();
+
+                if(letter_selected != 1) {
+                    letter_selected = 1;
+                    update();
+                }
+                else {
+                    letter_selected = -1;
+                    update();
+                }
             }
         });
 
         OptionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                letter_selected = 2;
-                update();
+
+                if(letter_selected != 2) {
+                    letter_selected = 2;
+                    update();
+                }
+                else {
+                    letter_selected = -1;
+                    update();
+                }
             }
         });
 
         OptionD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                letter_selected = 3;
-                update();
+                if(letter_selected != 3) {
+                    letter_selected = 3;
+                    update();
+                }
+                else {
+                    letter_selected = -1;
+                    update();
+                }
             }
         });
 
@@ -247,6 +302,13 @@ public class PairQuestionFragment extends Fragment {
 
     private void update() {
 
+        RegisterAnswers();
+        CheckButtons();
+        PrintLines();
+    }
+
+    private void RegisterAnswers() {
+
         if((number_selected != -1) && (letter_selected != -1)) {
             answer[number_selected] = -1;
             for(int i = 0; i < 4; i++) {
@@ -271,12 +333,9 @@ public class PairQuestionFragment extends Fragment {
                 }
             }
         }
+    }
 
-//        for(int i = 0; i < 4; i++) {
-//            switch (answer[i])
-//        }
-
-
+    private void PrintLines() {
         Float[][] Coords_number = new Float[4][2];
         Float[][] Coords_letter = new Float[4][2];
 
@@ -302,34 +361,60 @@ public class PairQuestionFragment extends Fragment {
         imageView.setCoords_letter(Coords_letter);
         imageView.setAnswers(answer);
         imageView.invalidate();
+    }
 
+    private void CheckButtons() {
 
-//#####################################TESTING###################################################
+        if((number_selected == 0) || (answer[0] != -1))
+            Option1.setChecked(true);
+        else
+            Option1.setChecked(false);
+
+        if((number_selected == 1) || (answer[1] != -1))
+            Option2.setChecked(true);
+        else
+            Option2.setChecked(false);
+
+        if((number_selected == 2) || (answer[2] != -1))
+            Option3.setChecked(true);
+        else
+            Option3.setChecked(false);
+
+        if((number_selected == 3) || (answer[3] != -1))
+            Option4.setChecked(true);
+        else
+            Option4.setChecked(false);
+
+        for(int i = 0; i < 4; i++)
+            array_letters_selected[i] = false;
+
         for(int i = 0; i < 4; i++) {
-            String ans;
-            switch (answer[i]) {
-
-                case(0):
-                    ans = "a)";
+            for(int j = 0; j < 4; j++)
+                if (answer[i] == j) {
+                    array_letters_selected[j] = true;
                     break;
-                case(1):
-                    ans = " b)";
-                    break;
-                case(2):
-                    ans = " c)";
-                    break;
-                case(3):
-                    ans = " d)";
-                    break;
-                default:
-                    ans = "empty";
-
-            }
-            Log.d(Integer.toString(i + 1) + ".", ans);
+                }
         }
-        Log.d(".", "############################################");
 
-        //#####################################TESTING###################################################
+        if((letter_selected == 0) || array_letters_selected[0])
+            OptionA.setChecked(true);
+        else
+            OptionA.setChecked(false);
+
+        if((letter_selected == 1) || array_letters_selected[1])
+            OptionB.setChecked(true);
+        else
+            OptionB.setChecked(false);
+
+        if((letter_selected == 2) || array_letters_selected[2])
+            OptionC.setChecked(true);
+        else
+            OptionC.setChecked(false);
+
+        if((letter_selected == 3) || array_letters_selected[3])
+            OptionD.setChecked(true);
+        else
+            OptionD.setChecked(false);
     }
 
 }
