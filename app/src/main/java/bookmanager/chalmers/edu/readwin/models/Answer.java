@@ -1,16 +1,22 @@
 package bookmanager.chalmers.edu.readwin.models;
 
+import java.lang.reflect.Type;
+
 /**
  * Created by benedikt on 12/10/2017.
  */
 
 public class Answer {
     private int QuestionNumber;
-    private String Answer;
+    private String QuestionType; // Multiple, Pair
+    private String MultiAnswer; // Used with Multiple choice questions
+    private String[] PairAnswer; // Uset with Pairing questions
 
-    public Answer(int questionNumber, String answer) {
+    public Answer(int questionNumber, String type, String multiAnswer, String[] pairAnswer) {
         QuestionNumber = questionNumber;
-        Answer = answer;
+        QuestionType = type;
+        MultiAnswer = multiAnswer;
+        PairAnswer = pairAnswer;
     }
 
     public int getQuestionNumber() {
@@ -21,11 +27,27 @@ public class Answer {
         QuestionNumber = questionNumber;
     }
 
-    public String getAnswer() {
-        return Answer;
+    public String getQuestionType() {
+        return QuestionType;
     }
 
-    public void setAnswer(String answer) {
-        Answer = answer;
+    public void setQuestionType(String questionType) {
+        QuestionType = questionType;
+    }
+
+    public String getMultiAnswer() {
+        return MultiAnswer;
+    }
+
+    public void setMultiAnswer(String multiAnswer) {
+        MultiAnswer = multiAnswer;
+    }
+
+    public String[] getPairAnswer() {
+        return PairAnswer;
+    }
+
+    public void setPairAnswer(String[] pairAnswer) {
+        PairAnswer = pairAnswer;
     }
 }

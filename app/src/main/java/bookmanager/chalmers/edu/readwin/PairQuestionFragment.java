@@ -129,7 +129,6 @@ public class PairQuestionFragment extends Fragment {
         for(int i=0; i < 4; i++)
             answer[i] = -1;
 
-
         Option1.setChecked(false);
         Option2.setChecked(false);
         Option3.setChecked(false);
@@ -138,7 +137,6 @@ public class PairQuestionFragment extends Fragment {
         OptionB.setChecked(false);
         OptionC.setChecked(false);
         OptionD.setChecked(false);
-
 
 
         Option1.setOnClickListener(new View.OnClickListener() {
@@ -296,12 +294,10 @@ public class PairQuestionFragment extends Fragment {
         finishQuestionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                QuestionService questionService = new QuestionService();
-                List<Answer> answers = new ArrayList<Answer>();
-                int points = questionService.answerBookQuestions(currentBook.getId(), answers);
                 markQuestionsFinished();
+                int score = gradeQuestions();
                 getActivity().finish();
-                Toast.makeText(getContext(), "You got x out of " + n_of_questions + " questions correct! Congratulation you have earned your self " + points + " points!" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Congratulation you have earned your self " + score + " points!" , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -345,6 +341,29 @@ public class PairQuestionFragment extends Fragment {
                 }
             }
         }
+
+        String[] ans = new String[3];
+        if(answer[0] > -1)
+            ans[0] = currentQuestion.getPair().getLetterColumn()[answer[0]];
+        else
+            ans[0] = null;
+
+        if(answer[1] > -1)
+            ans[1] = currentQuestion.getPair().getLetterColumn()[answer[1]];
+        else
+            ans[1] = null;
+
+        if(answer[2] > -1)
+            ans[2] = currentQuestion.getPair().getLetterColumn()[answer[2]];
+        else
+            ans[2] = null;
+
+        if(answer[3] > -1)
+            ans[3] = currentQuestion.getPair().getLetterColumn()[answer[3]];
+        else
+            ans[3] = null;
+
+        saveAnswer(ans);
     }
 
     private void PrintLines() {
@@ -408,25 +427,43 @@ public class PairQuestionFragment extends Fragment {
                 }
         }
 
-        if((letter_selected == 0) || array_letters_selected[0])
+        if((letter_selected == 0) || array_letters_selected[0]) {
             OptionA.setChecked(true);
-        else
+        } else {
             OptionA.setChecked(false);
+        }
 
-        if((letter_selected == 1) || array_letters_selected[1])
+        if((letter_selected == 1) || array_letters_selected[1]) {
             OptionB.setChecked(true);
-        else
+        } else {
             OptionB.setChecked(false);
+        }
 
-        if((letter_selected == 2) || array_letters_selected[2])
+        if((letter_selected == 2) || array_letters_selected[2]) {
             OptionC.setChecked(true);
-        else
+        } else {
             OptionC.setChecked(false);
+        }
 
-        if((letter_selected == 3) || array_letters_selected[3])
+        if((letter_selected == 3) || array_letters_selected[3]) {
             OptionD.setChecked(true);
-        else
+        } else {
             OptionD.setChecked(false);
+        }
+    }
+
+    private int gradeQuestions() {
+
+        QuestionService answerService = new QuestionService();
+        List<Answer> answers = getAnswers();
+
+        int score = answerService.answerBookQuestions(currentBook.getId(), answers);
+
+        currentUser.setCurrentScore(currentUser.getCurrentScore() + score);
+        UserService userService = new UserService(getContext());
+        userService.modifyCurrentUser(currentUser);
+        return score;
+
     }
 
     private void markQuestionsFinished() {
@@ -439,8 +476,14 @@ public class PairQuestionFragment extends Fragment {
         editor.commit();
     }
 
-    /*
-    private void saveAnswer(String answer) {
+    private void savePairAnswer(int option, String answer) {
+        Answer answerPair = getAnswer();
+        String[] ans = answerPair.getPairAnswer();
+        ans[option] = answer;
+        saveAnswer(ans);
+    }
+
+    private void saveAnswer(String[] pairAnswers) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("questions", Context.MODE_PRIVATE);
 
         List<Answer> answers = getAnswers();
@@ -454,7 +497,7 @@ public class PairQuestionFragment extends Fragment {
             }
         }
 
-        Answer answerObject = new Answer(question_index, answer);
+        Answer answerObject = new Answer(question_index, "Pair", null, pairAnswers);
         answers.add(answerObject);
 
         Gson gson = new Gson();
@@ -489,5 +532,6 @@ public class PairQuestionFragment extends Fragment {
         if(answerList == null)
             return new ArrayList<Answer>();
         return answerList;
-    }*/
+    }
+
 }

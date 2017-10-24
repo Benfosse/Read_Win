@@ -41,7 +41,7 @@ public class QuestionService implements IQuestionService {
             questions.add(question6);
             questions.add(question7);
             questions.add(question8);
-            //questions.add(question9);
+            questions.add(question9);
         }
         return questions;
     }
@@ -57,38 +57,46 @@ public class QuestionService implements IQuestionService {
 
     public int answerBookQuestions(int bookId, List<Answer> answers) {
         int score = 0;
-        Log.d("ANSWERS", "Answers size: " + answers.size());
         if(bookId == 1) {
             for (Answer a: answers) {
-                Log.d("ANSWERS", "ID: " + a.getQuestionNumber() + " Answer: " + a.getAnswer());
-                if(a.getQuestionNumber() == 0 && a.getAnswer().equals("Bilbo"))
+                if(a.getQuestionNumber() == 0 && a.getMultiAnswer().equals("Bilbo"))
                     score += 100;
-                if(a.getQuestionNumber() == 1 && a.getAnswer().equals("Bag End"))
+                if(a.getQuestionNumber() == 1 && a.getMultiAnswer().equals("Bag End"))
                     score += 100;
-                if(a.getQuestionNumber() == 2 && a.getAnswer().equals("Precious"))
+                if(a.getQuestionNumber() == 2 && a.getMultiAnswer().equals("Precious"))
                     score += 100;
-                if(a.getQuestionNumber() == 3 && a.getAnswer().equals("Smaug"))
+                if(a.getQuestionNumber() == 3 && a.getMultiAnswer().equals("Smaug"))
                     score += 100;
-                if(a.getQuestionNumber() == 4 && a.getAnswer().equals("Bard"))
+                if(a.getQuestionNumber() == 4 && a.getMultiAnswer().equals("Bard"))
                     score += 100;
-                if(a.getQuestionNumber() == 5 && a.getAnswer().equals("It makes its wearer invisible"))
+                if(a.getQuestionNumber() == 5 && a.getMultiAnswer().equals("It makes its wearer invisible"))
                     score += 100;
-                if(a.getQuestionNumber() == 6 && a.getAnswer().equals("The Necromancer"))
+                if(a.getQuestionNumber() == 6 && a.getMultiAnswer().equals("The Necromancer"))
                     score += 100;
-                if(a.getQuestionNumber() == 7 && a.getAnswer().equals("Sting"))
+                if(a.getQuestionNumber() == 7 && a.getMultiAnswer().equals("Sting"))
                     score += 100;
-                if(a.getQuestionNumber() == 8 && a.getAnswer().equals("The Lonely Mountain"))
+                if(a.getQuestionNumber() == 8 && a.getMultiAnswer().equals("The Lonely Mountain"))
                     score += 100;
-
-                //if(a.getQuestionNumber() == 10 && a.getAnswer().equals(""))
-                //    score += 100;
+                if(a.getQuestionNumber() == 10 && a.getQuestionType() == "Pair")
+                {
+                    String[] pairAnswers = a.getPairAnswer();
+                    for(int l = 0; l < pairAnswers.length; l++) {
+                        if(pairAnswers[l].equals("Man"))
+                            score += 25;
+                        if(pairAnswers[l].equals("Wizard"))
+                            score += 25;
+                        if(pairAnswers[l].equals("Hobbit"))
+                            score += 25;
+                        if(pairAnswers[l].equals("Dwarf"))
+                            score += 25;
+                    }
+                }
             }
 
             return score;
         }
-        else {
+        else
             return score;
-        }
     }
 
 }

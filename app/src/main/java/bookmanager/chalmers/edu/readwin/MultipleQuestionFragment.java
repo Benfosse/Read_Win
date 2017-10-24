@@ -115,22 +115,22 @@ public class MultipleQuestionFragment extends Fragment {
             ans4.setChecked(false);
         }
         else {
-            if(answer.getAnswer().equals(options[0]))
+            if(answer.getMultiAnswer().equals(options[0]))
                 ans1.setChecked(true);
             else
                 ans1.setChecked(false);
 
-            if(answer.getAnswer().equals(options[1]))
+            if(answer.getMultiAnswer().equals(options[1]))
                 ans2.setChecked(true);
             else
                 ans2.setChecked(false);
 
-            if(answer.getAnswer().equals(options[2]))
+            if(answer.getMultiAnswer().equals(options[2]))
                 ans3.setChecked(true);
             else
                 ans3.setChecked(false);
 
-            if(answer.getAnswer().equals(options[3]))
+            if(answer.getMultiAnswer().equals(options[3]))
                 ans4.setChecked(true);
             else
                 ans4.setChecked(false);
@@ -215,8 +215,6 @@ public class MultipleQuestionFragment extends Fragment {
         finishQuestionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                QuestionService questionService = new QuestionService();
-                List<Answer> answers = new ArrayList<Answer>();
                 markQuestionsFinished();
                 int score = gradeQuestions();
                 getActivity().finish();
@@ -267,7 +265,7 @@ public class MultipleQuestionFragment extends Fragment {
             }
         }
 
-        Answer answerObject = new Answer(question_index, answer);
+        Answer answerObject = new Answer(question_index, "Multiple", answer, null);
         answers.add(answerObject);
 
         Gson gson = new Gson();
