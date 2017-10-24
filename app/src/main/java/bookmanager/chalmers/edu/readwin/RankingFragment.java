@@ -88,6 +88,23 @@ public class RankingFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Calculating and setting remaining time
+        Calendar calendar = Calendar.getInstance();
+        int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        int hourInDay = calendar.get(Calendar.HOUR_OF_DAY);
+        TextView daysRemaining = rootView.findViewById(R.id.ranking_time_remaining);
+        daysRemaining.setText((daysInMonth - dayOfMonth) + " Days " + (24 - hourInDay) + " Hours ");
+
+        ListView rankingList = rootView.findViewById(R.id.ranking_list);
+        List<UserScore> userScores = new RankingService(getContext()).getRankings(null, 0).getUserScores();
+        Collections.sort(userScores);
+        rankingList.setAdapter(new ArrayAdapter<UserScore>(getContext(), R.layout.ranking_view_text, userScores));
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

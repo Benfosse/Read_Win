@@ -23,6 +23,10 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -434,4 +438,56 @@ public class PairQuestionFragment extends Fragment {
         editor.putString(currentUser.getId() + "-" + currentBook.getId(), "Finished");
         editor.commit();
     }
+
+    /*
+    private void saveAnswer(String answer) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("questions", Context.MODE_PRIVATE);
+
+        List<Answer> answers = getAnswers();
+        Answer currentAnswer = getAnswer();
+
+        if(currentAnswer != null) {
+            for(int i = 0; i < answers.size(); i++) {
+                Answer a = answers.get(i);
+                if(a.getQuestionNumber() == currentAnswer.getQuestionNumber())
+                    answers.remove(i);
+            }
+        }
+
+        Answer answerObject = new Answer(question_index, answer);
+        answers.add(answerObject);
+
+        Gson gson = new Gson();
+        String serializedAnswer = gson.toJson(answerObject);
+        String serializedAnswers = gson.toJson(answers);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // User Id - Book Id - Question Id
+        editor.remove(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index);
+        editor.putString(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index, serializedAnswer);
+
+        editor.remove(currentUser.getId() + "-" + currentBook.getId());
+        editor.putString(currentUser.getId() + "-" + currentBook.getId(), serializedAnswers);
+
+        editor.commit();
+    }
+
+    private Answer getAnswer() {
+        SharedPreferences sharedpreferences = getContext().getSharedPreferences("questions", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        return gson.fromJson(sharedpreferences.getString(currentUser.getId() + "-" + currentBook.getId() + "-" + question_index, ""), Answer.class);
+    }
+
+    private List<Answer> getAnswers() {
+        SharedPreferences sharedpreferences = getContext().getSharedPreferences("questions", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+
+        String list = sharedpreferences.getString(currentUser.getId() + "-" + currentBook.getId(), "");
+        Type answerListType = new TypeToken<List<Answer>>() {}.getType();
+        List<Answer> answerList = gson.fromJson(list, answerListType);
+        if(answerList == null)
+            return new ArrayList<Answer>();
+        return answerList;
+    }*/
 }

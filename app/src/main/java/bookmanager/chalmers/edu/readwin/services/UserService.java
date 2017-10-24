@@ -56,6 +56,7 @@ public class UserService implements IUserService {
         currentUser.setLastName(user.getLastName());
         currentUser.setYearOfBirth(user.getYearOfBirth());
         currentUser.setPassword(Cryptor.encryptIt(user.getPassword()));
+        currentUser.setCurrentScore(user.getCurrentScore());
 
         users.add(currentUser);
 

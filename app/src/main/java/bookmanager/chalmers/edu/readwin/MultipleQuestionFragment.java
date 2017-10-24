@@ -217,10 +217,10 @@ public class MultipleQuestionFragment extends Fragment {
             public void onClick(View view) {
                 QuestionService questionService = new QuestionService();
                 List<Answer> answers = new ArrayList<Answer>();
-                int points = questionService.answerBookQuestions(currentBook.getId(), answers);
                 markQuestionsFinished();
+                int score = gradeQuestions();
                 getActivity().finish();
-                Toast.makeText(getContext(), "You got x out of " + n_of_questions + " questions correct! Congratulation you have earned your self " + points + " points!" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Congratulation you have earned your self " + score + " points!" , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -229,6 +229,18 @@ public class MultipleQuestionFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    private int gradeQuestions() {
+        QuestionService answerService = new QuestionService();
+        List<Answer> answers = getAnswers();
+
+        int score = answerService.answerBookQuestions(currentBook.getId(), answers);
+
+        currentUser.setCurrentScore(currentUser.getCurrentScore() + score);
+        UserService userService = new UserService(getContext());
+        userService.modifyCurrentUser(currentUser);
+        return score;
     }
 
     private void markQuestionsFinished() {
