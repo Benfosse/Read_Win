@@ -125,6 +125,9 @@ public class User implements Parcelable {
         return Password;
     }
 
+    public void setPassword(String password) {
+        Password = password;
+    }
 
     public User(Parcel parcel) {
         String[] data = new String[9];

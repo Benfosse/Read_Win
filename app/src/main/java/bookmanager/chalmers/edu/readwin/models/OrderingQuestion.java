@@ -14,7 +14,6 @@ public class OrderingQuestion implements Parcelable {
     private String Question;
     private String[] Events;
 
-
     public OrderingQuestion(String question, String[] events) {
 
         Question = question;

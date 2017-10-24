@@ -121,7 +121,8 @@
         android:background="@drawable/question_button_background"
         android:button="@android:color/transparent"
         android:text="RadioButton"
-        android:padding="5dp" />
+        android:padding="5dp"
+        />
 
     <Button
         android:id="@+id/finishedWithQuestionsButton"

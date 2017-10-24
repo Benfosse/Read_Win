@@ -47,6 +47,7 @@ import javax.crypto.spec.DESKeySpec;
 import android.util.Base64;
 import javax.crypto.*;
 
+import bookmanager.chalmers.edu.readwin.helpers.UserValidator;
 import bookmanager.chalmers.edu.readwin.models.User;
 import bookmanager.chalmers.edu.readwin.services.UserService;
 
@@ -125,8 +126,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-
-
     }
 
     private void populateAutoComplete() {
@@ -195,28 +194,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) && !UserValidator.isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
-
-        //Test de connexions
-
-       /* List <String> listClone = new ArrayList<String>();
-        for (String string : list) {
-            if(string.matches("(?i)(bea).*")){
-                listClone.add(string);
-            }
-        }
-        System.out.println(listClone);*/
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!UserValidator.isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
@@ -228,70 +217,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView.requestFocus();
         } else {
 
-            //User user1 = userService.getUser(email);
+            UserService userService = new UserService(getApplicationContext());
+            User user = userService.getUser(email);
 
-            Bundle b = getIntent().getExtras();
-            ArrayList<User> arr = (ArrayList<User>)b.get("userlist");
-            User user1;
-
-            int i = 0;
-            while ((arr.get(i).getEmail().equals(email) != true) && i < arr.size()-1) {
-                i += 1;
-            }
-            if(arr.get(i).getEmail().equals(email)){
-                user1 = arr.get(i);
-            }
-            else{
-                user1 = arr.get(0);
-            }
-
-            //System.out.println("USER EMAIL : " + user1.getEmail());
+            password = Cryptor.encryptIt(password);
 
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 
-            if(email.equals(user1.getEmail())){
-                if(password.equals(Cryptor.decryptIt(user1.getPassword()))){
+            if(user != null && email.equals(user.getEmail())){
+                if(password.equals(user.getPassword())){
                     showProgress(true);
                     mAuthTask = new UserLoginTask(email, password);
                     mAuthTask.execute((Void) null);
 
-                    Bundle bundle = getIntent().getExtras();
-                    Intent intent = new Intent(context,MyProfil.class);
-                    //Intent intent= new Intent(context, GameMainPage.class);
-                    //intent.putExtra("userID",arr.get(i).getId());
-                    intent.putExtra("user",arr.get(i));
+                    userService.login(user);
+
+                    Intent intent = new Intent(context,GameMainPage.class);
                     startActivity(intent);
                     finish();
                 }
                 else{
-                    //System.out.println("Password dehash = " + Cryptor.decryptIt(user1.getPassword()) + " mdp hash = " + user1.getPassword());
                     mPasswordView.setError(getString(R.string.error_invalid_password_from_users));
-
                 }
             }
             else{
                 //System.out.println("Email is : "+ email + " And should be : "+ user1.getEmail());
                 mEmailView.setError(getString(R.string.error_invalid_email_from_users));
             }
-
-
-/*
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null); */
-
         }
-    }
-
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
     }
 
     /**

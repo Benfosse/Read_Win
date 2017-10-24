@@ -11,12 +11,14 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:text="Ranking"
+        android:textColor="#fff"
         android:textSize="30dp"
         android:textStyle="bold"/>
 
     <TextView
         android:text="Time Remaining:"
-        android:textSize="25dp"
+        android:textColor="#fff"
+        android:textSize="23dp"
         android:textStyle="bold"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="80dp"
@@ -26,8 +28,9 @@
     <TextView
         android:id="@+id/ranking_time_remaining"
         android:text="25D 10H 22M"
-        android:textSize="20dp"
-        android:layout_marginLeft="240dp"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:layout_marginLeft="220dp"
         android:layout_marginTop="85dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

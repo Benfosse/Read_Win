@@ -8,10 +8,12 @@
 
     <TextView
         android:id="@+id/book_list_header"
-        android:layout_width="220dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="65dp"
         android:layout_marginTop="25dp"
+        android:textAlignment="center"
+        android:textColor="#fff"
         android:text="@string/categorie1"
         android:textSize="30dp"
         android:textStyle="bold"/>
@@ -36,7 +38,7 @@
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/arrow_left" />
 
@@ -44,7 +46,7 @@
         android:id="@+id/age_category_right"
         android:layout_width="50dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="310dp"
+        android:layout_marginLeft="305dp"
         android:layout_marginTop="30dp"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/arrow_righ" />

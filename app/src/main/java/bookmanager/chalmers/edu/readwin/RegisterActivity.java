@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import bookmanager.chalmers.edu.readwin.helpers.UserValidator;
 import bookmanager.chalmers.edu.readwin.models.User;
+import bookmanager.chalmers.edu.readwin.services.UserService;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -125,10 +126,6 @@ public class RegisterActivity extends AppCompatActivity {
             yearofbirth=Integer.parseInt(mYearOfBirth.getText().toString());
         }
 
-        Bundle b = getIntent().getExtras();
-        ArrayList<User> arr = (ArrayList<User>)b.get("userlist");
-        int Sizelist = arr.size();
-
         //mAuthTask.execute();
 
         if (cancel) {
@@ -136,14 +133,11 @@ public class RegisterActivity extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
+            UserService userService = new UserService(getApplicationContext());
+            userService.createUser(username, email, firstname, lastname, yearofbirth, null, password);
 
-            User user1 = new User(Sizelist,username,email,firstname,lastname,yearofbirth,"",0,Cryptor.encryptIt(password));
-            arr.add(user1);
-            Intent loginregister = new Intent(this, Login_Register_Activity.class);
-            loginregister.putExtra("userlist",arr);
-            startActivity(loginregister);
- /*ADD USER IN DATABASE */
-
+            Intent gameMainPage = new Intent(this, GameMainPage.class);
+            startActivity(gameMainPage);
         }
     }
 
