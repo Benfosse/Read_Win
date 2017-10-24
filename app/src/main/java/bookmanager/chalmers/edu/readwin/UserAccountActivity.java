@@ -49,6 +49,28 @@ public class UserAccountActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        UserService userService = new UserService(getApplicationContext());
+        currentUser = userService.getCurrentUser();
+
+        TextView userName = (TextView) findViewById(R.id.account_username);
+        TextView firstName = (TextView) findViewById(R.id.account_first_name);
+        TextView lastName = (TextView) findViewById(R.id.account_last_name);
+        TextView yearOfBirth = (TextView) findViewById(R.id.account_date_of_birth);
+        TextView email = (TextView) findViewById(R.id.account_email);
+        TextView userScore = (TextView) findViewById(R.id.account_score);
+
+        userName.setText(currentUser.getUserName());
+        firstName.setText(currentUser.getFirstName());
+        lastName.setText(currentUser.getLastName());
+        yearOfBirth.setText(String.valueOf(currentUser.getYearOfBirth()));
+        email.setText(currentUser.getEmail());
+        userScore.setText(String.valueOf(currentUser.getCurrentScore()));
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

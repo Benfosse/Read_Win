@@ -47,11 +47,14 @@ public class UserService implements IUserService {
     }
 
     public void modifyCurrentUser(User user) {
-
         User currentUser = getUser(user.getId());
         List<User> users = getUserList();
 
-        users.remove(currentUser);
+        for(int i = 0; i < users.size(); i++) {
+            User u = users.get(i);
+            if(u.getUserName().equals(currentUser.getUserName()))
+                users.remove(i);
+        }
 
         currentUser.setEmail(user.getEmail());
         currentUser.setFirstName(user.getFirstName());
@@ -69,6 +72,8 @@ public class UserService implements IUserService {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(String.valueOf(user.getId()), serializedUser);
+        editor.remove("currentUser");
+        editor.remove("users");
         editor.putString("currentUser", serializedUser);
         editor.putString("users", serializedUserList);
         editor.commit();
@@ -88,6 +93,8 @@ public class UserService implements IUserService {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(String.valueOf(user.getId()), serializedUser);
+        editor.remove("currentUser");
+        editor.remove("users");
         editor.putString("currentUser", serializedUser);
         editor.putString("users", serializedUserList);
         editor.commit();
@@ -144,6 +151,19 @@ public class UserService implements IUserService {
         } catch (Exception e) {
             // TODO: Error handling
             throw e;
+        }
+    }
+
+    private void debug()
+    {
+        User user = getCurrentUser();
+        Log.d("CURRENT USER", "UserId: " + String.valueOf(user.getId()) + "\nFirst Name: " + user.getFirstName() + "\nLast Name: " + user.getLastName()
+        + "\nEmail: " + user.getEmail() + "\nPassword: " + user.getPassword());
+
+        List<User> users = getUserList();
+        for (User u: users) {
+            Log.d("USER", "UserId: " + String.valueOf(u.getId()) + "\nFirst Name: " + u.getFirstName() + "\nLast Name: " + u.getLastName()
+                    + "\nEmail: " + u.getEmail() + "\nPassword: " + u.getPassword());
         }
     }
 }

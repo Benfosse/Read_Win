@@ -126,8 +126,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-
-
     }
 
     private void populateAutoComplete() {
@@ -240,9 +238,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     finish();
                 }
                 else{
-                    //System.out.println("Password dehash = " + Cryptor.decryptIt(user1.getPassword()) + " mdp hash = " + user1.getPassword());
                     mPasswordView.setError(getString(R.string.error_invalid_password_from_users));
-
                 }
             }
             else{
