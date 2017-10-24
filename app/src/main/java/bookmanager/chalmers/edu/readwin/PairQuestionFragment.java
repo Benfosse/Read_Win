@@ -1,7 +1,11 @@
 package bookmanager.chalmers.edu.readwin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +37,16 @@ public class PairQuestionFragment extends Fragment {
 
     FloatingActionButton next, prev;
     int question_index, n_of_questions;
-    TextView Option1, Option2, Option3, Option4, OptionA, OptionB, OptionC, OptionD, Question;
+    RadioButton Option1, Option2, Option3, Option4, OptionA, OptionB, OptionC, OptionD;
+    TextView Question;
     private Question currentQuestion;
     private Book currentBook;
+    private Integer[] answer = new Integer[4];
+    private int number_selected = -1;
+    private int letter_selected = -1;
+
+
+    MyImageView imageView;
 
     public PairQuestionFragment() {
     }
@@ -73,15 +86,17 @@ public class PairQuestionFragment extends Fragment {
 
         TextView title = rootView.findViewById(R.id.pairQuestionTitle);
         Question = (TextView) rootView.findViewById(R.id.pairQuestion);
-        Option1 = (TextView) rootView.findViewById(R.id.option1);
-        Option2 = (TextView) rootView.findViewById(R.id.option2);
-        Option3 = (TextView) rootView.findViewById(R.id.option3);
-        Option4 = (TextView) rootView.findViewById(R.id.option4);
-        OptionA = (TextView) rootView.findViewById(R.id.optionA);
-        OptionB = (TextView) rootView.findViewById(R.id.optionB);
-        OptionC = (TextView) rootView.findViewById(R.id.optionC);
-        OptionD = (TextView) rootView.findViewById(R.id.optionD);
+        Option1 = (RadioButton) rootView.findViewById(R.id.option1);
+        Option2 = (RadioButton) rootView.findViewById(R.id.option2);
+        Option3 = (RadioButton) rootView.findViewById(R.id.option3);
+        Option4 = (RadioButton) rootView.findViewById(R.id.option4);
+        OptionA = (RadioButton) rootView.findViewById(R.id.optionA);
+        OptionB = (RadioButton) rootView.findViewById(R.id.optionB);
+        OptionC = (RadioButton) rootView.findViewById(R.id.optionC);
+        OptionD = (RadioButton) rootView.findViewById(R.id.optionD);
         Button finishQuestionsButton = rootView.findViewById(R.id.finishedWithQuestionsButton);
+        imageView = (MyImageView) rootView.findViewById(R.id.draw);
+
 
         title.setText(currentBook.getTitle());
         Question.setText(pQuestion.getHeading());
@@ -98,89 +113,82 @@ public class PairQuestionFragment extends Fragment {
         OptionC.setText(numbers[2]);
         OptionD.setText(numbers[3]);
 
-        Disable(OptionA);
-        Disable(OptionB);
-        Disable(OptionC);
-        Disable(OptionD);
+        for(int i=0; i < 4; i++)
+            answer[i] = -1;
+
+
+        Option1.setChecked(false);
+        Option2.setChecked(false);
+        Option3.setChecked(false);
+        Option4.setChecked(false);
+        OptionA.setChecked(false);
+        OptionB.setChecked(false);
+        OptionC.setChecked(false);
+        OptionD.setChecked(false);
+
+
 
         Option1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option1.setTypeface(null, Typeface.BOLD);
-                Option2.setTypeface(null, Typeface.NORMAL);
-                Option3.setTypeface(null, Typeface.NORMAL);
-                Option4.setTypeface(null, Typeface.NORMAL);
-                Enable(OptionA);
-                Enable(OptionB);
-                Enable(OptionC);
-                Enable(OptionD);
+                number_selected = 0;
+                update();
+//                test.dotWidth= 40;
+//                test.invalidate();
+
             }
         });
         Option2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option1.setTypeface(null, Typeface.NORMAL);
-                Option2.setTypeface(null, Typeface.BOLD);
-                Option3.setTypeface(null, Typeface.NORMAL);
-                Option4.setTypeface(null, Typeface.NORMAL);
+                number_selected = 1;
+                update();
             }
         });
         Option3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option1.setTypeface(null, Typeface.NORMAL);
-                Option2.setTypeface(null, Typeface.NORMAL);
-                Option3.setTypeface(null, Typeface.BOLD);
-                Option4.setTypeface(null, Typeface.NORMAL);
+                number_selected = 2;
+                update();
             }
         });
         Option4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option1.setTypeface(null, Typeface.NORMAL);
-                Option2.setTypeface(null, Typeface.NORMAL);
-                Option3.setTypeface(null, Typeface.NORMAL);
-                Option4.setTypeface(null, Typeface.BOLD);
+                number_selected = 3;
+                update();
             }
         });
 
         OptionA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option1.setTypeface(null, Typeface.NORMAL);
-                Option2.setTypeface(null, Typeface.NORMAL);
-                Option3.setTypeface(null, Typeface.NORMAL);
-                Option4.setTypeface(null, Typeface.NORMAL);
+                letter_selected = 0;
+                update();
             }
         });
 
         OptionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option1.setTypeface(null, Typeface.NORMAL);
-                Option2.setTypeface(null, Typeface.NORMAL);
-                Option3.setTypeface(null, Typeface.NORMAL);
-                Option4.setTypeface(null, Typeface.NORMAL);
+                letter_selected = 1;
+                update();
             }
         });
 
         OptionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option1.setTypeface(null, Typeface.NORMAL);
-                Option2.setTypeface(null, Typeface.NORMAL);
-                Option3.setTypeface(null, Typeface.NORMAL);
-                Option4.setTypeface(null, Typeface.NORMAL);
+                letter_selected = 2;
+                update();
             }
         });
 
         OptionD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option1.setTypeface(null, Typeface.NORMAL);
-                Option2.setTypeface(null, Typeface.NORMAL);
-                Option3.setTypeface(null, Typeface.NORMAL);
-                Option4.setTypeface(null, Typeface.NORMAL);
+                letter_selected = 3;
+                update();
             }
         });
 
@@ -237,14 +245,91 @@ public class PairQuestionFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void Enable(TextView text) {
-        text.setTextColor(Color.parseColor("#000000"));
-        text.setEnabled(true);
-    }
+    private void update() {
 
-    private void Disable(TextView text) {
-        text.setTextColor(Color.parseColor("#9d9c9e"));
-       text.setEnabled(false);
+        if((number_selected != -1) && (letter_selected != -1)) {
+            answer[number_selected] = -1;
+            for(int i = 0; i < 4; i++) {
+                if (answer[i] == letter_selected) {
+                    answer[i] = -1;
+                    break;
+                }
+            }
+            answer[number_selected] = letter_selected;
+            number_selected = -1;
+            letter_selected = -1;
+        }
+
+        else if(number_selected != -1 && letter_selected == -1)
+            answer[number_selected] = -1;
+
+        else if (number_selected == -1 && letter_selected != -1) {
+            for(int i = 0; i < 4; i++) {
+                if (answer[i] == letter_selected) {
+                    answer[i] = -1;
+                    break;
+                }
+            }
+        }
+
+//        for(int i = 0; i < 4; i++) {
+//            switch (answer[i])
+//        }
+
+
+        Float[][] Coords_number = new Float[4][2];
+        Float[][] Coords_letter = new Float[4][2];
+
+        Coords_number[0][0] = Option1.getX() + Option1.getWidth() - 10;
+        Coords_number[0][1] = Option1.getY() + Option1.getHeight() - 10;
+        Coords_number[1][0] = Option2.getX() + Option2.getWidth() - 10;
+        Coords_number[1][1] = Option2.getY() + Option2.getHeight() - 10;
+        Coords_number[2][0] = Option3.getX() + Option3.getWidth() - 10;
+        Coords_number[2][1] = Option3.getY() + Option3.getHeight() - 10;
+        Coords_number[3][0] = Option4.getX() + Option4.getWidth() - 10;
+        Coords_number[3][1] = Option4.getY() + Option4.getHeight() - 10;
+
+        Coords_letter[0][0] = OptionA.getX();
+        Coords_letter[0][1] = OptionA.getY() + OptionA.getHeight() - 15;
+        Coords_letter[1][0] = OptionB.getX();
+        Coords_letter[1][1] = OptionB.getY() + OptionA.getHeight() - 15;
+        Coords_letter[2][0] = OptionC.getX();
+        Coords_letter[2][1] = OptionC.getY() + OptionA.getHeight() - 15 ;
+        Coords_letter[3][0] = OptionD.getX();
+        Coords_letter[3][1] = OptionD.getY() + OptionA.getHeight() - 15;
+
+        imageView.setCoords_number(Coords_number);
+        imageView.setCoords_letter(Coords_letter);
+        imageView.setAnswers(answer);
+        imageView.invalidate();
+
+
+//#####################################TESTING###################################################
+        for(int i = 0; i < 4; i++) {
+            String ans;
+            switch (answer[i]) {
+
+                case(0):
+                    ans = "a)";
+                    break;
+                case(1):
+                    ans = " b)";
+                    break;
+                case(2):
+                    ans = " c)";
+                    break;
+                case(3):
+                    ans = " d)";
+                    break;
+                default:
+                    ans = "empty";
+
+            }
+            Log.d(Integer.toString(i + 1) + ".", ans);
+        }
+        Log.d(".", "############################################");
+
+        //#####################################TESTING###################################################
     }
 
 }

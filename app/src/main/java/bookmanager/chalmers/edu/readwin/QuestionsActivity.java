@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.List;
 
@@ -42,6 +41,7 @@ public class QuestionsActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.questions_container);
         mViewPager.setAdapter(mQuestionsPagerAdapter);
+
     }
 
     @Override
