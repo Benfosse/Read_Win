@@ -12,6 +12,8 @@ import bookmanager.chalmers.edu.readwin.models.Book;
 import bookmanager.chalmers.edu.readwin.models.Question;
 
 
+
+// TODO: Finish implementation
 public class OrderQuestionFragment extends Fragment {
 
     private View rootView;
@@ -19,7 +21,6 @@ public class OrderQuestionFragment extends Fragment {
     public OrderQuestionFragment() {
         // Required empty public constructor
     }
-
 
     public static OrderQuestionFragment newInstance(int questionIndex, int questionsSize, Question question, Book book) {
         OrderQuestionFragment fragment = new OrderQuestionFragment();

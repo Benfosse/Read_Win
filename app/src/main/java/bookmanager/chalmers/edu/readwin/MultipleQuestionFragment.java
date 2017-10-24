@@ -185,4 +185,8 @@ public class MultipleQuestionFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
+    private void saveAnswer() {
+
+    }
 }
