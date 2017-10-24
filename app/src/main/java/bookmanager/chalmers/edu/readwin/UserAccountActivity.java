@@ -3,6 +3,9 @@ package bookmanager.chalmers.edu.readwin;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -51,7 +54,14 @@ public class UserAccountActivity extends AppCompatActivity {
         TextView email = (TextView) findViewById(R.id.account_email);
         TextView userScore = (TextView) findViewById(R.id.account_score);
         ImageView avatar = (ImageView) findViewById(R.id.account_avatar_preview);
-        File imgPath = new File(Environment.getExternalStorageDirectory()+ File.separator + "avatar.png");
+        String path = Environment.getExternalStorageDirectory()+ File.separator + "avatar.png";
+        File imgFile = new File(path);
+
+        if(imgFile.exists())
+        {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            avatar.setImageBitmap(myBitmap);
+        }
 
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +71,6 @@ public class UserAccountActivity extends AppCompatActivity {
             }
         });
 
-      /*  if(currentUser.getAvatar()!=null){
-            if(imgPath.exists()){
-                Picasso.with(context).load(new File(Environment.getExternalStorageDirectory()+ File.separator + "avatar.png")).into(avatar);
-            }
-        }*/
 
         userName.setText(currentUser.getUserName());
         firstName.setText(currentUser.getFirstName());
@@ -95,12 +100,15 @@ public class UserAccountActivity extends AppCompatActivity {
         TextView yearOfBirth = (TextView) findViewById(R.id.account_date_of_birth);
         TextView email = (TextView) findViewById(R.id.account_email);
         TextView userScore = (TextView) findViewById(R.id.account_score);ImageView avatar = (ImageView) findViewById(R.id.account_avatar_preview);
-        File imgPath = new File(Environment.getExternalStorageDirectory()+ File.separator + "avatar.png");
-        /*if(currentUser.getAvatar()!=null){
-            if(imgPath.exists()){
-                Picasso.with(context).load(new File(Environment.getExternalStorageDirectory()+ File.separator + "avatar.png")).into(avatar);
-            }
-        }*/
+        String path = Environment.getExternalStorageDirectory()+ File.separator + "avatar.png";
+        File imgFile = new File(path);
+
+        if(imgFile.exists())
+        {
+            Bitmap myBitmap = BitmapFactory.decodeFile(path);
+            avatar.setImageBitmap(myBitmap);
+
+        }
 
         userName.setText(currentUser.getUserName());
         firstName.setText(currentUser.getFirstName());
