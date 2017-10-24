@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import bookmanager.chalmers.edu.readwin.helpers.UserValidator;
 import bookmanager.chalmers.edu.readwin.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -72,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) && !UserValidator.isPasswordValid(password)) {
             mPassword.setError(getString(R.string.error_invalid_password));
             focusView = mPassword;
             cancel = true;
@@ -83,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
             mEmail.setError(getString(R.string.error_field_required));
             focusView = mEmail;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!UserValidator.isEmailValid(email)) {
             mEmail.setError(getString(R.string.error_invalid_email));
             focusView = mEmail;
             cancel = true;
@@ -115,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
             mYearOfBirth.setError("You forgot your Year of Birth ?");
             focusView = mYearOfBirth;
             cancel = true;}
-        else if(!isYearofBirthValid(Integer.parseInt(mYearOfBirth.getText().toString()))){
+        else if(!UserValidator.isYearofBirthValid(Integer.parseInt(mYearOfBirth.getText().toString()))){
             mYearOfBirth.setError(getString(R.string.error_invalid_yearofbirth));
             focusView = mYearOfBirth;
             cancel = true;
@@ -144,22 +145,6 @@ public class RegisterActivity extends AppCompatActivity {
  /*ADD USER IN DATABASE */
 
         }
-    }
-
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
-
-    private boolean isYearofBirthValid(int yearofbirth) {
-        //TODO: Replace this with your own logic
-        int length = String.valueOf(yearofbirth).length();
-        return length == 4;
     }
 
     public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {

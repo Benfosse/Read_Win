@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="bookmanager.chalmers.edu.readwin.UserAccountActivity"
-    android:background="@drawable/general_background" >
+    tools:context="bookmanager.chalmers.edu.readwin.EditUserAccountActivity"
+    android:background="@drawable/general_background">
 
     <ImageView
         android:id="@+id/account_avatar_preview"
@@ -28,7 +28,7 @@
         android:layout_marginLeft="30dp"/>
 
     <TextView
-        android:id="@+id/account_username"
+        android:id="@+id/account_edit_username"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:text="Username"
@@ -46,13 +46,13 @@
         android:layout_marginTop="200dp"
         android:layout_marginLeft="30dp"/>
 
-    <TextView
-        android:id="@+id/account_first_name"
-        android:layout_width="260dp"
+    <EditText
+        android:id="@+id/account_edit_first_name"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="First Name"
         android:textColor="#fff"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="195dp"
         android:layout_marginLeft="130dp" />
 
     <TextView
@@ -65,13 +65,13 @@
         android:layout_marginTop="250dp"
         android:layout_marginLeft="30dp" />
 
-    <TextView
-        android:id="@+id/account_last_name"
-        android:layout_width="260dp"
+    <EditText
+        android:id="@+id/account_edit_last_name"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="Last Name"
         android:textColor="#fff"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="245dp"
         android:layout_marginLeft="130dp"
         />
 
@@ -85,14 +85,14 @@
         android:layout_marginTop="300dp"
         android:layout_marginLeft="30dp" />
 
-    <TextView
-        android:id="@+id/account_date_of_birth"
-        android:layout_width="260dp"
+    <EditText
+        android:id="@+id/account_edit_date_of_birth"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="Year of Birth"
         android:inputType="number"
         android:textColor="#fff"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="295dp"
         android:layout_marginLeft="130dp" />
 
     <TextView
@@ -105,32 +105,33 @@
         android:layout_marginTop="350dp"
         android:layout_marginLeft="30dp" />
 
-    <TextView
-        android:id="@+id/account_email"
-        android:layout_width="260dp"
+    <EditText
+        android:id="@+id/account_edit_email"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="Email"
         android:textColor="#fff"
         android:inputType="textEmailAddress"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="345dp"
         android:layout_marginLeft="130dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Score : "
+        android:text="Password: "
         android:layout_alignParentLeft="true"
         android:textStyle="bold"
         android:textColor="#fff"
         android:layout_marginTop="400dp"
-        android:layout_marginLeft="30dp"/>
+        android:layout_marginLeft="30dp" />
 
-    <TextView
-        android:id="@+id/account_score"
-        android:layout_width="260dp"
+    <EditText
+        android:id="@+id/account_edit_password"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:text="My Score"
         android:textColor="#fff"
-        android:layout_marginTop="400dp"
-        android:layout_marginLeft="130dp"/>
+        android:inputType="textPassword"
+        android:layout_marginTop="395dp"
+        android:layout_marginLeft="130dp" />
+
 </RelativeLayout>
