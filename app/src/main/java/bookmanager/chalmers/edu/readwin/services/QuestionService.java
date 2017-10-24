@@ -30,6 +30,7 @@ public class QuestionService implements IQuestionService {
         List<Question> questions = new ArrayList<>();
 
         if(bookId == 1) {
+            questions.add(question10);
             questions.add(question1);
             questions.add(question2);
             questions.add(question3);
@@ -39,7 +40,6 @@ public class QuestionService implements IQuestionService {
             questions.add(question7);
             questions.add(question8);
             questions.add(question9);
-            questions.add(question10);
         }
         return questions;
     }
