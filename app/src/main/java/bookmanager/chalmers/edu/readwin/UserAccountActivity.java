@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -21,11 +22,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.StringSignature;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.UUID;
 
 import bookmanager.chalmers.edu.readwin.models.User;
 import bookmanager.chalmers.edu.readwin.services.UserService;
@@ -59,8 +66,19 @@ public class UserAccountActivity extends AppCompatActivity {
 
         if(imgFile.exists())
         {
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            avatar.setImageBitmap(myBitmap);
+
+
+            //Bitmap myBitmap = BitmapFactory.decodeFile(path);
+            Bitmap myBitmap = decodeFile(imgFile);
+           // avatar.setImageBitmap(getScaledBitmap(path, 100, 100));
+            //avatar.setImageBitmap(myBitmap);
+            //avatar.setImageURI(Uri.parse(new File(path).toString()));
+            //avatar.setImageBitmap(getScaledBitmap(path,400,400));
+            Glide.with(avatar.getContext()).load(path).signature(new StringSignature(UUID.randomUUID().toString())).into(avatar);
+
+            //  Picasso.with(context).load(new File(path)).into(avatar);
+
+
         }
 
         avatar.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +123,18 @@ public class UserAccountActivity extends AppCompatActivity {
 
         if(imgFile.exists())
         {
-            Bitmap myBitmap = BitmapFactory.decodeFile(path);
-            avatar.setImageBitmap(myBitmap);
+            //Bitmap myBitmap = BitmapFactory.decodeFile(path);
+            Bitmap myBitmap = decodeFile(imgFile);
+            //avatar.setImageBitmap(getScaledBitmap(path, 100, 100));
+           // avatar.setImageURI(Uri.parse(new File(path).toString()));
+            //avatar.setImageBitmap(myBitmap);
+           // avatar.setImageBitmap(getScaledBitmap(path,400,400));
+            //Glide.with(avatar.getContext()).skipMemoryCache(true);
+            Glide.with(avatar.getContext()).load(path).signature(new StringSignature(UUID.randomUUID().toString())).into(avatar);
+
+
+            //Picasso.with(context).load(new File(path)).into(avatar);
+
 
         }
 
@@ -145,7 +173,8 @@ public class UserAccountActivity extends AppCompatActivity {
 
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(UserAccountActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
+        int result2 = ContextCompat.checkSelfPermission(UserAccountActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED && result2==PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
             return false;
@@ -158,6 +187,12 @@ public class UserAccountActivity extends AppCompatActivity {
             Toast.makeText(UserAccountActivity.this, "Read External Storage permission allows us to display avatar. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(UserAccountActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+        }
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(UserAccountActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(UserAccountActivity.this, "Read External Storage permission allows us to display avatar. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(UserAccountActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
     }
 
@@ -172,5 +207,67 @@ public class UserAccountActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    // Decodes image and scales it to reduce memory consumption
+    private Bitmap decodeFile(File f) {
+        try {
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+
+            // The new size we want to scale to
+            final int REQUIRED_SIZE=70;
+
+            // Find the correct scale value. It should be the power of 2.
+            int scale = 1;
+            while(o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                    o.outHeight / scale / 2 >= REQUIRED_SIZE) {
+                scale *= 2;
+            }
+
+            // Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+        } catch (FileNotFoundException e) {}
+        return null;
+    }
+
+    private Bitmap getScaledBitmap(String picturePath, int width, int height) {
+        BitmapFactory.Options sizeOptions = new BitmapFactory.Options();
+        sizeOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(picturePath, sizeOptions);
+
+        int inSampleSize = calculateInSampleSize(sizeOptions, width, height);
+
+        sizeOptions.inJustDecodeBounds = false;
+        sizeOptions.inSampleSize = inSampleSize;
+
+        return BitmapFactory.decodeFile(picturePath, sizeOptions);
+    }
+
+    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            // Calculate ratios of height and width to requested height and
+            // width
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+
+            // Choose the smallest ratio as inSampleSize value, this will
+            // guarantee
+            // a final image with both dimensions larger than or equal to the
+            // requested height and width.
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+
+        return inSampleSize;
     }
 }
