@@ -70,4 +70,16 @@
     <string name="ability_disabled_need_newer_api_level">That ability is disabled because it requires a newer Android version (at least API level 17).</string>
     <string name="smudge">Smudge</string>
 
+    <string name="intro_text">Will you be able to win the reward!?\r\n\r\n
+
+Challenge your knowledge of selected books and answer as many questions as you can!\r\n\r\n
+
+For that, you just need to:\r\n\r\n
+
+1. Select a book,\r\n
+2. Read this book,\r\n
+3. Start the questionnaire,\r\n
+4. To best answer the different questions (multiple choice, find the pairs or order the answers),\r\n
+5. Get first place on the podium by reading as many books as you can</string>
+
 </resources>
