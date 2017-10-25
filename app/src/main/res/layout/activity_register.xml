@@ -115,14 +115,14 @@
         android:layout_alignParentRight="true"/>
 
     <TextView
-        android:id="@+id/passwordtxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password : "
-        android:layout_alignParentLeft="true"
-        android:textStyle="bold"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="10dp"/>
+    android:id="@+id/passwordtxt"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Password : "
+    android:layout_alignParentLeft="true"
+    android:textStyle="bold"
+    android:layout_marginTop="350dp"
+    android:layout_marginLeft="10dp"/>
     <EditText
         android:id="@+id/passwordform"
         android:layout_width="260dp"
@@ -133,6 +133,25 @@
         android:layout_alignBaseline="@+id/passwordtxt"
         android:layout_alignParentRight="true"/>
 
+    <TextView
+        android:id="@+id/passwordtxt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password: "
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="10dp"/>
+    <EditText
+        android:id="@+id/passwordform2"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:hint="Confirm password"
+        android:textColor="#fff"
+        android:inputType="textPassword"
+        android:layout_alignBaseline="@+id/passwordtxt2"
+        android:layout_alignParentRight="true"/>
+
     <Button
         android:id="@+id/validatebutton"
         android:layout_width="wrap_content"
@@ -140,7 +159,7 @@
         android:text="Register"
         android:layout_below="@+id/passwordform"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:textColor="#000000"/>
     </RelativeLayout>
 </ScrollView>
