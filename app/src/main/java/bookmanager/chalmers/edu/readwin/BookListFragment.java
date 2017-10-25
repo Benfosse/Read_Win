@@ -64,7 +64,7 @@ public class BookListFragment extends Fragment{
         final GridView bookGrid = rootView.findViewById(R.id.book_grid);
         ageCategoryIndex = 0;
 
-        bookListHeader.setText(bookCategories.get(ageCategoryIndex) + " Years Old");
+        bookListHeader.setText(bookCategories.get(ageCategoryIndex));
 
         // TODO: Should be showing the age category that the current user falls into, instead of default category
         setUpBookListGrid(bookGrid, bookService.getBooks(bookCategories.get(0)));
@@ -81,7 +81,7 @@ public class BookListFragment extends Fragment{
                 else
                     ageCategoryIndex -= 1;
 
-                bookListHeader.setText(bookCategories.get(ageCategoryIndex) + " Years Old");
+                bookListHeader.setText(bookCategories.get(ageCategoryIndex));
                 setUpBookListGrid(bookGrid, bookService.getBooks(bookCategories.get(ageCategoryIndex)));
             }
         });
@@ -94,7 +94,7 @@ public class BookListFragment extends Fragment{
                 else
                     ageCategoryIndex += 1;
 
-                bookListHeader.setText(bookCategories.get(ageCategoryIndex) + " Years Old");
+                bookListHeader.setText(bookCategories.get(ageCategoryIndex));
                 setUpBookListGrid(bookGrid, bookService.getBooks(bookCategories.get(ageCategoryIndex)));
             }
         });
