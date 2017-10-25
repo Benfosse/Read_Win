@@ -61,7 +61,8 @@ public class UserAccountActivity extends AppCompatActivity {
         TextView email = (TextView) findViewById(R.id.account_email);
         TextView userScore = (TextView) findViewById(R.id.account_score);
         ImageView avatar = (ImageView) findViewById(R.id.account_avatar_preview);
-        String path = Environment.getExternalStorageDirectory()+ File.separator + "avatar.png";
+        String path = Environment.getExternalStorageDirectory()
+                + File.separator + "avatar" +currentUser.getId() + ".png";
         File imgFile = new File(path);
 
         if(imgFile.exists())
@@ -118,7 +119,8 @@ public class UserAccountActivity extends AppCompatActivity {
         TextView yearOfBirth = (TextView) findViewById(R.id.account_date_of_birth);
         TextView email = (TextView) findViewById(R.id.account_email);
         TextView userScore = (TextView) findViewById(R.id.account_score);ImageView avatar = (ImageView) findViewById(R.id.account_avatar_preview);
-        String path = Environment.getExternalStorageDirectory()+ File.separator + "avatar.png";
+        String path = Environment.getExternalStorageDirectory()
+                + File.separator + "avatar" +currentUser.getId() + ".png";
         File imgFile = new File(path);
 
         if(imgFile.exists())
