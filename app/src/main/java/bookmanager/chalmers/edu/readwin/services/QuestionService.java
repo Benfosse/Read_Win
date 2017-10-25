@@ -26,7 +26,7 @@ public class QuestionService implements IQuestionService {
     private Question question6 = new Question(6, "Multiple", new MultipleQuestion("What evil charecter lives in Mirkwood?", new String[]{"The Necromancer", "The Alchemist", "The Magician", "The Sorcerer"}), null, null);
     private Question question7 = new Question(7, "Multiple", new MultipleQuestion("What is the name of Bilbo´s sword?", new String[]{"Punisher", "Lightening", "Straw", "Sting"}), null, null);
     private Question question8 = new Question(8, "Multiple", new MultipleQuestion("Where does the dragon Smaug live?", new String[]{"The Misty Mountains", "In the mines of Moria", "In Bag end", "The Lonely Mountain"}), null, null);
-    private Question question9 = new Question(9, "Pair", null, new PairQuestion("Pair these together", new String[]{"Bilbo", "Gandalf", "Thorin Oakenshield", "Bard"}, new String[]{"Man", "Wizard", "Hobbit", "Dwarf"}), null);
+    private Question question9 = new Question(9, "Pair", null, new PairQuestion("Pair these together", new String[]{"Man", "Wizard", "Hobbit", "Dwarf"}, new String[]{"Bilbo", "Gandalf", "Thorin Oakenshield", "Bard"}), null);
 
     public List<Question> getBookQuestions(int bookId) {
         List<Question> questions = new ArrayList<>();
@@ -77,17 +77,17 @@ public class QuestionService implements IQuestionService {
                     score += 100;
                 if(a.getQuestionNumber() == 8 && a.getMultiAnswer().equals("The Lonely Mountain"))
                     score += 100;
-                if(a.getQuestionNumber() == 10 && a.getQuestionType() == "Pair")
+                if(a.getQuestionNumber() == 9 && a.getQuestionType() == "Pair")
                 {
                     String[] pairAnswers = a.getPairAnswer();
                     for(int l = 0; l < pairAnswers.length; l++) {
-                        if(pairAnswers[l].equals("Man"))
+                        if(pairAnswers[l].equals("Hobbit"))
                             score += 25;
                         if(pairAnswers[l].equals("Wizard"))
                             score += 25;
-                        if(pairAnswers[l].equals("Hobbit"))
-                            score += 25;
                         if(pairAnswers[l].equals("Dwarf"))
+                            score += 25;
+                        if(pairAnswers[l].equals("Man"))
                             score += 25;
                     }
                 }

@@ -116,6 +116,23 @@ public class BookListFragment extends Fragment{
     }
     */
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        final BookService bookService = new BookService();
+        final List<String> bookCategories = bookService.getBookCategories();
+        final TextView bookListHeader = rootView.findViewById(R.id.book_list_header);
+        final GridView bookGrid = rootView.findViewById(R.id.book_grid);
+        ageCategoryIndex = 0;
+
+        bookListHeader.setText(bookCategories.get(ageCategoryIndex) + " Years Old");
+
+        // TODO: Should be showing the age category that the current user falls into, instead of default category
+        setUpBookListGrid(bookGrid, bookService.getBooks(bookCategories.get(0)));
+
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

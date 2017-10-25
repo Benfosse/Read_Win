@@ -342,26 +342,28 @@ public class PairQuestionFragment extends Fragment {
             }
         }
 
-        String[] ans = new String[3];
+        String[] ans = new String[4];
         if(answer[0] > -1)
-            ans[0] = currentQuestion.getPair().getLetterColumn()[answer[0]];
+            ans[0] = currentQuestion.getPair().getNumberColumn()[answer[0]];
         else
             ans[0] = null;
 
         if(answer[1] > -1)
-            ans[1] = currentQuestion.getPair().getLetterColumn()[answer[1]];
+            ans[1] = currentQuestion.getPair().getNumberColumn()[answer[1]];
         else
             ans[1] = null;
 
         if(answer[2] > -1)
-            ans[2] = currentQuestion.getPair().getLetterColumn()[answer[2]];
+            ans[2] = currentQuestion.getPair().getNumberColumn()[answer[2]];
         else
             ans[2] = null;
 
         if(answer[3] > -1)
-            ans[3] = currentQuestion.getPair().getLetterColumn()[answer[3]];
+            ans[3] = currentQuestion.getPair().getNumberColumn()[answer[3]];
         else
             ans[3] = null;
+        Log.d("ANSWERS1", "ANS: " + ans[0] + " " + ans[1] + " " + ans[2] + " " + ans[3]);
+        //Log.d("ANSWERS3", "ANS: " + answer[0] + " " + answer[1] + " " + answer[2] + " " + answer[3]);
 
         saveAnswer(ans);
     }
@@ -458,12 +460,10 @@ public class PairQuestionFragment extends Fragment {
         List<Answer> answers = getAnswers();
 
         int score = answerService.answerBookQuestions(currentBook.getId(), answers);
-
         currentUser.setCurrentScore(currentUser.getCurrentScore() + score);
         UserService userService = new UserService(getContext());
         userService.modifyCurrentUser(currentUser);
         return score;
-
     }
 
     private void markQuestionsFinished() {
