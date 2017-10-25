@@ -72,6 +72,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import bookmanager.chalmers.edu.readwin.models.User;
+import bookmanager.chalmers.edu.readwin.services.UserService;
+
 @SuppressLint("ClickableViewAccessibility")
 public class EasyPaint extends GraphicsActivity implements
 		ColorPickerDialog.OnColorChangedListener {
@@ -88,6 +91,7 @@ public class EasyPaint extends GraphicsActivity implements
 	private boolean doubleBackToExitPressedOnce = false;
 	private static final int CHOOSE_IMAGE = 0;
 	private MyView contentView;
+    User currentUser;
 
 	private boolean waitingForBackgroundColor = false; //If true and colorChanged() is called, fill the background, else mPaint.setColor()
 	private boolean extractingColor = false; //If this is true, the next touch event should extract a color rather than drawing a line.
@@ -95,6 +99,8 @@ public class EasyPaint extends GraphicsActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        UserService userService = new UserService(getApplicationContext());
+        currentUser = userService.getCurrentUser();
 
 		// it removes the title from the actionbar(more space for icons?)
 		// this.getActionBar().setDisplayShowTitleEnabled(false);
@@ -641,7 +647,7 @@ public class EasyPaint extends GraphicsActivity implements
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
 		File f = new File(Environment.getExternalStorageDirectory()
-				+ File.separator + "avatar.png");
+				+ File.separator + "avatar" +currentUser.getId() + ".png");
 		f.createNewFile();
 		FileOutputStream fo = new FileOutputStream(f);
 		fo.write(bytes.toByteArray());

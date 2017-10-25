@@ -23,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mYearOfBirth;
     private EditText mEmail;
     private EditText mPassword;
+    private EditText mPasswordconf;
     private View mProgressView;
     private View mLoginFormView;
     private UserRegisterTask mAuthTask = null;
@@ -40,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
         mYearOfBirth = (EditText) findViewById(R.id.dateofbirthform);
         mEmail = (EditText) findViewById(R.id.emailform);
         mPassword = (EditText) findViewById(R.id.passwordform);
+        mPasswordconf = (EditText) findViewById(R.id.passwordform2);
+
 
         Button mValidate = (Button) findViewById(R.id.validatebutton);
         mValidate.setOnClickListener(new View.OnClickListener() {
@@ -69,14 +72,21 @@ public class RegisterActivity extends AppCompatActivity {
         int yearofbirth = 0;
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
+        String passwordconf = mPasswordconf.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password) && !UserValidator.isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) || !UserValidator.isPasswordValid(password)) {
             mPassword.setError(getString(R.string.error_invalid_password));
             focusView = mPassword;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(passwordconf) || !password.equals(passwordconf)) {
+            mPasswordconf.setError(getString(R.string.error_invalid_password_from_users));
+            focusView = mPasswordconf;
             cancel = true;
         }
 
