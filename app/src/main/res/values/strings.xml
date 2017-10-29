@@ -32,7 +32,7 @@
 
     <!-- Categories-->
 
-    <string name="categorie1">8 - 10 Years Old</string>
+    <string name="categorie1"></string>
     <string name="title_activity_login__register_">Login_Register_Activity</string>
 
     <!-- Draws-->
